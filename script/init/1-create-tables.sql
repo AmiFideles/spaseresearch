@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS SpaceshipPlanetType
 
 
 -- Enum для пола
--- CREATE TYPE Gender AS ENUM ('Male', 'Female');
+CREATE TYPE Gender AS ENUM ('Male', 'Female');
 
 
 -- Таблица "Исследователь"
@@ -90,7 +90,9 @@ CREATE TABLE IF NOT EXISTS Researchers
     password      VARCHAR(255)       NOT NULL CHECK (LENGTH(password) > 6)
 );
 
--- CREATE TYPE ExpeditionStatus AS ENUM ('IN_PROGRESS', 'LANDED', 'COMPLETED');
+-- Enum для статуса экспедиции
+CREATE TYPE ExpeditionStatus AS ENUM ('IN_PROGRESS', 'LANDED', 'COMPLETED');
+
 -- Таблица "Экспедиция"
 CREATE TABLE IF NOT EXISTS Expeditions
 (
@@ -184,4 +186,3 @@ CREATE TABLE IF NOT EXISTS ProfessionsCabinAssignment
     FOREIGN KEY (profession_id) REFERENCES Professions (profession_id) ON DELETE CASCADE,
     FOREIGN KEY (cabin_id) REFERENCES Cabins (cabin_id) ON DELETE CASCADE
 );
-

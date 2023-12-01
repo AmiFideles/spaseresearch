@@ -128,10 +128,10 @@ BEGIN
                   FROM stations
                            JOIN planets p ON stations.planet_id = p.planet_id
                   WHERE station_id = NEW.destination_station_id
-                    AND p.type_id IN (SELECT type_id
-                                      FROM spaceships
-                                               JOIN spaceshipplanettype sp ON spaceships.spaceship_id
-                                      WHERE spaceships.spaceship_id = NEW.spaceship_id)) THEN
+                    AND p.type_id IN (SELECT sp.type_id
+                                      FROM spaceships s
+                                               JOIN spaceshipplanettype sp ON s.spaceship_id = sp.spaceship_id
+                                      WHERE s.spaceship_id = NEW.spaceship_id)) THEN
         RAISE EXCEPTION 'Incorrect destination planet type';
     END IF;
     IF NOT EXISTS(SELECT *
@@ -140,12 +140,13 @@ BEGIN
                     AND spaceships.current_station_id = NEW.source_station_id) THEN
         RAISE EXCEPTION 'Incorrect source station';
     END IF;
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
 
 CREATE OR REPLACE TRIGGER check_correct_station_spaceship_trigger
-    AFTER INSERT
+    BEFORE INSERT
     ON Expeditions
     FOR EACH ROW
 EXECUTE FUNCTION check_correct_station_spaceship();
