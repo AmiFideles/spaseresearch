@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: spaceresearch
+  datasource:
+    url: jdbc:postgresql://localhost:5436/spaceresearch
+    username: itmo
+    password: itmo
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  thymeleaf:
+    cache: false
