@@ -1,14 +1,16 @@
 package niu.itmo.spaceresearch.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author amifideles
  */
+@EqualsAndHashCode(exclude = {"expedition", "breakdownTypes"})
+@ToString(exclude = {"expedition", "breakdownTypes"})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,4 +27,11 @@ public class Report {
     @OneToOne
     @JoinColumn(name = "expedition_id", unique = true, nullable = false)
     private Expedition expedition;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "reportsbreakdowns",
+            joinColumns = {@JoinColumn(name = "report_id")},
+            inverseJoinColumns = {@JoinColumn(name = "breakdown_type_id")})
+    private Set<BreakdownType> breakdownTypes = new HashSet<>();
 }

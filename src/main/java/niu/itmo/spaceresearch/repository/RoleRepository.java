@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author amifideles
  */
 public interface RoleRepository extends JpaRepository<Profession, Long> {
-    Profession findByName(String name);
 }

@@ -1,16 +1,16 @@
 package niu.itmo.spaceresearch.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author amifideles
  */
+@EqualsAndHashCode(exclude = {"spaceship", "commander", "sourceStation", "destinationStation", "researchers"})
+@ToString(exclude = {"spaceship", "commander", "sourceStation", "destinationStation", "researchers"})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -47,5 +47,8 @@ public class Expedition {
     @ManyToOne
     @JoinColumn(name = "destination_station_id", nullable = false)
     private Station destinationStation;
+
+    @ManyToMany(mappedBy = "expeditions")
+    private List<Researcher> researchers;
 
 }

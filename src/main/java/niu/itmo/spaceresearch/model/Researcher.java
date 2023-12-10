@@ -1,17 +1,16 @@
 package niu.itmo.spaceresearch.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author amifideles
  */
+@EqualsAndHashCode(exclude = {"expeditions", "professions"})
+@ToString(exclude = {"expeditions", "professions"})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -30,8 +29,8 @@ public class Researcher {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email", nullable = false)
-    private String email;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -46,12 +45,19 @@ public class Researcher {
     @Column(name = "gender", nullable = false)
     private Sex sex;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
-            name = "users_roles",
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
-    private List<Profession> professions = new ArrayList<>();
+            name = "expeditionresearchers",
+            joinColumns = {@JoinColumn(name = "expedition_id")},
+            inverseJoinColumns = {@JoinColumn(name = "researcher_id")})
+    private Set<Expedition> expeditions = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "researcherprofessions",
+            joinColumns = {@JoinColumn(name = "researcher_id")},
+            inverseJoinColumns = {@JoinColumn(name = "profession_id")})
+    private Set<Profession> professions = new HashSet<>();
 
 
 }

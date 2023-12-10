@@ -1,16 +1,15 @@
 package niu.itmo.spaceresearch.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 /**
  * @author amifideles
  */
+@EqualsAndHashCode(exclude = {"spaceships", "planetType"})
+@ToString(exclude = {"spaceships", "planetType"})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,6 +23,9 @@ public class PlanetType {
     private Integer id;
     @Column(name = "name", nullable = false)
     private String name;
-    @OneToMany(mappedBy = "galaxy")
+    @OneToMany(mappedBy = "planetType")
     private List<Planet> planetType;
+    @ManyToMany(mappedBy = "planetTypes")
+    private List<Spaceship> spaceships;
+
 }

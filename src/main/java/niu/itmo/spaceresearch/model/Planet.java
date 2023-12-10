@@ -1,10 +1,7 @@
 package niu.itmo.spaceresearch.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,6 +9,8 @@ import java.util.List;
 /**
  * @author amifideles
  */
+@EqualsAndHashCode(exclude = {"galaxy", "planetType", "stations"})
+@ToString(exclude = {"galaxy", "planetType", "stations"})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -34,5 +33,5 @@ public class Planet {
     @JoinColumn(name = "type_id", nullable = false)
     private PlanetType planetType;
     @OneToMany(mappedBy = "planet")
-    private List<Planet> stations;
+    private List<Station> stations;
 }

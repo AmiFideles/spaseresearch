@@ -1,16 +1,15 @@
 package niu.itmo.spaceresearch.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 /**
  * @author amifideles
  */
+@EqualsAndHashCode(exclude = {"researchers", "cabins"})
+@ToString(exclude = {"researchers", "cabins"})
 @Setter
 @Getter
 @NoArgsConstructor
@@ -26,6 +25,9 @@ public class Profession {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "professions")
     private List<Researcher> researchers;
+
+    @ManyToMany(mappedBy = "professions")
+    private List<Cabins> cabins;
 }

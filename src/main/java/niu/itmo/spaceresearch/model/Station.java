@@ -1,10 +1,7 @@
 package niu.itmo.spaceresearch.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,6 +9,8 @@ import java.time.LocalDate;
 /**
  * @author amifideles
  */
+@EqualsAndHashCode(exclude = {"planet"})
+@ToString(exclude = {"planet"})
 @Getter
 @Setter
 @NoArgsConstructor

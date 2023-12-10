@@ -1,17 +1,19 @@
 package niu.itmo.spaceresearch.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author amifideles
  */
+@EqualsAndHashCode(exclude = {"manufacturer", "cabins", "planetTypes"})
+@ToString(exclude = {"manufacturer", "cabins", "planetTypes"})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -47,4 +49,14 @@ public class Spaceship {
     @ManyToOne
     @JoinColumn(name = "manufacturer_id", nullable = false)
     private Manufacture manufacturer;
+
+    @OneToMany(mappedBy = "spaceship")
+    private List<Cabins> cabins;
+
+    @ManyToMany
+    @JoinTable(
+            name = "spaceshipplanettype",
+            joinColumns = {@JoinColumn(name = "spaceship_id")},
+            inverseJoinColumns = {@JoinColumn(name = "type_id")})
+    private Set<PlanetType> planetTypes = new HashSet<>();
 }
