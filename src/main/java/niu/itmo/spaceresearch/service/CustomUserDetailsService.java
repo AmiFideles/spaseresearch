@@ -1,8 +1,8 @@
 package niu.itmo.spaceresearch.service;
 
 import lombok.RequiredArgsConstructor;
-import niu.itmo.spaceresearch.model.Role;
-import niu.itmo.spaceresearch.model.User;
+import niu.itmo.spaceresearch.model.Profession;
+import niu.itmo.spaceresearch.model.Researcher;
 import niu.itmo.spaceresearch.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,20 +25,20 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
+        Researcher researcher = userRepository.findByEmail(email);
 
-        if (user != null) {
-            return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                    user.getPassword(),
-                    mapRolesToAuthorities(user.getRoles()));
+        if (researcher != null) {
+            return new org.springframework.security.core.userdetails.User(researcher.getEmail(),
+                    researcher.getPassword(),
+                    mapRolesToAuthorities(researcher.getProfessions()));
         } else {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        Collection<? extends GrantedAuthority> mapRoles = roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Profession> professions) {
+        Collection<? extends GrantedAuthority> mapRoles = professions.stream()
+                .map(profession -> new SimpleGrantedAuthority(profession.getName()))
                 .collect(Collectors.toList());
         return mapRoles;
     }

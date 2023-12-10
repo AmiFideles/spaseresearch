@@ -2,8 +2,8 @@ package niu.itmo.spaceresearch.service;
 
 import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.UserDto;
-import niu.itmo.spaceresearch.model.Role;
-import niu.itmo.spaceresearch.model.User;
+import niu.itmo.spaceresearch.model.Profession;
+import niu.itmo.spaceresearch.model.Researcher;
 import niu.itmo.spaceresearch.repository.RoleRepository;
 import niu.itmo.spaceresearch.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,43 +24,43 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public void saveUser(UserDto userDto) {
-        User user = new User();
-        user.setName(userDto.getFirstName() + " " + userDto.getLastName());
-        user.setEmail(userDto.getEmail());
+        Researcher researcher = new Researcher();
+        researcher.setName(userDto.getFirstName() + " " + userDto.getLastName());
+        researcher.setEmail(userDto.getEmail());
 
         //encrypt the password once we integrate spring security
         //user.setPassword(userDto.getPassword());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        Role role = roleRepository.findByName("ROLE_ADMIN");
-        if (role == null) {
-            role = checkRoleExist();
+        researcher.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        Profession profession = roleRepository.findByName("ROLE_ADMIN");
+        if (profession == null) {
+            profession = checkRoleExist();
         }
-        user.setRoles(Arrays.asList(role));
-        userRepository.save(user);
+        researcher.setProfessions(Arrays.asList(profession));
+        userRepository.save(researcher);
     }
 
-    public User findByEmail(String email) {
+    public Researcher findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     public List<UserDto> findAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users.stream().map(this::convertEntityToDto)
+        List<Researcher> researchers = userRepository.findAll();
+        return researchers.stream().map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    private UserDto convertEntityToDto(User user) {
+    private UserDto convertEntityToDto(Researcher researcher) {
         UserDto userDto = new UserDto();
-        String[] name = user.getName().split(" ");
+        String[] name = researcher.getName().split(" ");
         userDto.setFirstName(name[0]);
         userDto.setLastName(name[1]);
-        userDto.setEmail(user.getEmail());
+        userDto.setEmail(researcher.getEmail());
         return userDto;
     }
 
-    private Role checkRoleExist() {
-        Role role = new Role();
-        role.setName("ROLE_ADMIN");
-        return roleRepository.save(role);
+    private Profession checkRoleExist() {
+        Profession profession = new Profession();
+        profession.setName("ROLE_ADMIN");
+        return roleRepository.save(profession);
     }
 }

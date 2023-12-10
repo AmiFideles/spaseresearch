@@ -6,26 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 /**
  * @author amifideles
  */
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "reports")
 @Entity
-@Table(name="roles")
-public class Role
-{
+public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable=false, unique=true)
-    private String name;
-
-    @ManyToMany(mappedBy="roles")
-    private List<User> users;
+    @Column(name = "report_id")
+    private Integer id;
+    @Column(name = "description")
+    private String description;
+    @OneToOne
+    @JoinColumn(name = "expedition_id", unique = true, nullable = false)
+    private Expedition expedition;
 }
