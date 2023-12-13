@@ -51,4 +51,7 @@ public class Expedition {
     @ManyToMany(mappedBy = "expeditions")
     private List<Researcher> researchers;
 
+    @OneToOne(mappedBy = "expedition")
+    private Report report;
+
 }

@@ -42,7 +42,7 @@ public class Researcher {
     @Column(name = "in_expedition", nullable = false)
     private Boolean inExpedition;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "gender", nullable = false)
     private Gender gender;
 

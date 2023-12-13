@@ -14,7 +14,7 @@
         <th>Статус</th>
         <th>Дата начала</th>
         <th>Дата конца</th>
-        <th>Действия</th>
+        <th>Полное описание</th>
     </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
         <td th:text="${expedition.expeditionStatus}"></td>
         <td th:text="${expedition.departureTime}"></td>
         <td th:text="${expedition.expeditionStatus == T(niu.itmo.spaceresearch.model.ExpeditionStatus.COMPLETED) ? expedition.endTime : '-'}"></td>
-        <td><a th:href="@{/expeditions/details/{id}(id=${expedition.id})}" class="btn btn-primary">Подробнее</a></td>
+        <td><a th:href="@{/expeditions/details/{id}(id=${expedition.id})}" class="btn btn-primary">Посмотреть</a></td>
     </tr>
     </tbody>
 </table>

@@ -22,7 +22,7 @@ public class SpaceshipController {
     public String getExpeditions(Model model, @PathVariable Integer id) {
         Spaceship spaceship = spaceshipService.getSpaceshipById(id);
         model.addAttribute("spaceship", spaceship);
-        return "expeditionDescription";
+        return "spaceship";
     }
 
 }
