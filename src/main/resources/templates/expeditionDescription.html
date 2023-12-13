@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Expeditions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+<h2>Expeditions</h2>
+
+<table class="table" border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Status</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Source Station</th>
+        <th>Source Station details</th>
+        <th>Destination Station</th>
+        <th>Destination Station Details</th>
+        <th>Spaceship</th>
+        <th>Spaceship details</th>
+        <th>Commander</th>
+        <th>Participants</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${expedition.id}"></td>
+        <td th:text="${expedition.expeditionStatus}"></td>
+        <td th:text="${expedition.departureTime}"></td>
+        <td th:text="${expedition.endTime}"></td>
+        <td th:text="${expedition.sourceStation.name}"></td>
+        <td>
+            <a th:href="@{/station/{id}(id=${expedition.getSourceStation().getId()})}" class="btn btn-primary">Source
+                station details</a>
+        </td>
+        <td th:text="${expedition.destinationStation.name}"></td>
+        <td>
+            <a th:href="@{/station/{id}(id=${expedition.getSourceStation().getId()})}" class="btn btn-primary">Source
+                station details</a>
+        </td>
+        <td th:text="${expedition.spaceship.name}"></td>
+        <td><a th:href="@{/{id}(id=${expedition.id})}" class="btn btn-primary">Подробнее</a></td>
+        <td th:text="${expedition.commander.name}"></td>
+        <td>
+            <a th:href="@{/spaceship/{id}(id=${expedition.getSpaceship().getId()})}" class="btn btn-primary">Spaceship
+                Details</a>
+        </td>
+        <td th:text="${expedition.commander.firstName + expedition.commander.lastName}"></td>
+        <td>
+            <ul>
+                <li th:each="participant : ${expedition.researchers}">
+                    <span th:text="${participant.firstName + participant.lastName}"></span>
+                    <span th:if="${expedition.commander.id eq participant.id}">(Commander)</span>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
