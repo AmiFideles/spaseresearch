@@ -33,5 +33,4 @@ public class Station {
     @ManyToOne
     @JoinColumn(name = "planet_id", nullable = false)
     private Planet planet;
-
 }

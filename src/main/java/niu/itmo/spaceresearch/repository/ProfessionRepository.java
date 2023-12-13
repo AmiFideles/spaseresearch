@@ -1,9 +1,10 @@
 package niu.itmo.spaceresearch.repository;
 
+import niu.itmo.spaceresearch.model.Profession;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @author amifideles
  */
-public interface Profession extends JpaRepository<Profession, Long> {
+public interface ProfessionRepository extends JpaRepository<Profession, Long> {
 }

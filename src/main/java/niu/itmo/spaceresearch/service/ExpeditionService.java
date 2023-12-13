@@ -3,6 +3,7 @@ package niu.itmo.spaceresearch.service;
 import niu.itmo.spaceresearch.dto.ExpeditionDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ExpeditionService {
     void createExpedition(
@@ -12,8 +13,8 @@ public interface ExpeditionService {
             List<Integer> participantsIds,
             Integer commanderId
     );
-    
+
     List<ExpeditionDto> getAllExpeditions();
 
-    ExpeditionDto getExpeditionById(Integer id);
+    Optional<ExpeditionDto> getExpeditionById(Integer id);
 }

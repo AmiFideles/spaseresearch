@@ -25,7 +25,7 @@ CREATE OR REPLACE FUNCTION get_free_researchers()
                 first_name     varchar(255),
                 last_name      varchar(255),
                 age            integer,
-                gender         gender
+                gender         varchar(255)
             )
 AS
 $$

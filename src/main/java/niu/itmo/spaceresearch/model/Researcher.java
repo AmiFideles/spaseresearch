@@ -2,6 +2,7 @@ package niu.itmo.spaceresearch.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -43,7 +44,7 @@ public class Researcher {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
-    private Sex sex;
+    private Gender gender;
 
     @ManyToMany
     @JoinTable(
@@ -52,11 +53,12 @@ public class Researcher {
             inverseJoinColumns = {@JoinColumn(name = "researcher_id")})
     private Set<Expedition> expeditions = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "researcherprofessions",
             joinColumns = {@JoinColumn(name = "researcher_id")},
-            inverseJoinColumns = {@JoinColumn(name = "profession_id")})
+            inverseJoinColumns = {@JoinColumn(name = "profession_id")}
+    )
     private Set<Profession> professions = new HashSet<>();
 
 

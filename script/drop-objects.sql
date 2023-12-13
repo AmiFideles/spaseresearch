@@ -96,5 +96,4 @@ DROP TABLE IF EXISTS Breakdowntypes;
 
 DROP TABLE IF EXISTS Researchers;
 
-DROP TYPE  Gender;
 DROP TYPE  ExpeditionStatus;

@@ -66,15 +66,11 @@ CREATE TABLE IF NOT EXISTS Spaceships
 CREATE TABLE IF NOT EXISTS SpaceshipPlanetType
 (
     spaceship_id SERIAL NOT NULL,
-    type_id      INT NOT NULL,
+    type_id      INT    NOT NULL,
     PRIMARY KEY (spaceship_id, type_id),
     FOREIGN KEY (spaceship_id) REFERENCES Spaceships (spaceship_id) ON DELETE CASCADE,
     FOREIGN KEY (type_id) REFERENCES PlanetTypes (type_id) ON DELETE CASCADE
 );
-
-
--- Enum для пола
-CREATE TYPE Gender AS ENUM ('Male', 'Female');
 
 
 -- Таблица "Исследователь"
@@ -83,9 +79,9 @@ CREATE TABLE IF NOT EXISTS Researchers
     researcher_id SERIAL PRIMARY KEY,
     first_name    VARCHAR(255)       NOT NULL,
     last_name     VARCHAR(255)       NOT NULL,
-    in_expedition BOOLEAN            NOT NULL,
+    in_expedition BOOLEAN            NOT NULL DEFAULT false,
     age           INT CHECK (age > 18),
-    gender        Gender             NOT NULL,
+    gender        varchar(255)       NOT NULL,
     username      VARCHAR(50) UNIQUE NOT NULL,
     password      VARCHAR(255)       NOT NULL CHECK (LENGTH(password) > 6)
 );

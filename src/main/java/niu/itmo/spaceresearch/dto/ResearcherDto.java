@@ -1,6 +1,6 @@
 package niu.itmo.spaceresearch.dto;
 
-import niu.itmo.spaceresearch.model.Sex;
+import niu.itmo.spaceresearch.model.Gender;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public record ResearcherDto(
         String name,
         String surname,
         Integer age,
-        Sex sex,
+        Gender gender,
         @Nullable
         Boolean isCapitan,
         List<ProfessionDto> professions

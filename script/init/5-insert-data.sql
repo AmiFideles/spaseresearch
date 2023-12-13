@@ -47,12 +47,12 @@ VALUES
     (4, 'Ariane 5', true, 1, '1996-06-04', 4, 10800, 10);
 
 -- Заполнение таблицы "Researchers"
-INSERT INTO Researchers (researcher_id, first_name, last_name, in_expedition, age, gender, username, password)
+INSERT INTO Researchers (first_name, last_name, in_expedition, age, gender, username, password)
 VALUES
-    (1, 'John', 'Doe', true, 35, 'Male', 'johndoe', 'password123'),
-    (2, 'Jane', 'Smith', false, 28, 'Female', 'janesmith', 'password456'),
-    (3, 'Michael', 'Johnson', true, 42, 'Male', 'michaeljohnson', 'password789'),
-    (4, 'Emily', 'Davis', false, 31, 'Female', 'emilydavis', 'passwordabc');
+    ('John', 'Doe', true, 35, 'Male', 'johndoe', 'password123'),
+    ('Jane', 'Smith', false, 28, 'Female', 'janesmith', 'password456'),
+    ('Michael', 'Johnson', true, 42, 'Male', 'michaeljohnson', 'password789'),
+    ('Emily', 'Davis', false, 31, 'Female', 'emilydavis', 'passwordabc');
 
 -- Заполнение таблицы "Professions"
 INSERT INTO Professions (profession_id, name)

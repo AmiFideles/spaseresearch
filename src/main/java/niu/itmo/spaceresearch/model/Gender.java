@@ -3,7 +3,7 @@ package niu.itmo.spaceresearch.model;
 /**
  * @author amifideles
  */
-public enum Sex {
+public enum Gender {
     MALE,
     FEMALE
 }
