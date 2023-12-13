@@ -12,7 +12,6 @@ services:
       - type: bind
         source: ./script/init
         target: /docker-entrypoint-initdb.d
-
     env_file:
       - .env
 
