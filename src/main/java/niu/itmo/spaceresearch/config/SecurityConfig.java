@@ -1,6 +1,5 @@
 package niu.itmo.spaceresearch.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author amifideles
@@ -58,7 +59,7 @@ public class SecurityConfig {
     @Autowired
     public void authManager(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(userDetailsService)
+                   .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
 }

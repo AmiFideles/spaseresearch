@@ -7,15 +7,14 @@ import niu.itmo.spaceresearch.dto.StationIdDto;
 import niu.itmo.spaceresearch.model.Expedition;
 import niu.itmo.spaceresearch.service.StationService;
 import niu.itmo.spaceresearch.service.api.ExpeditionService;
+import niu.itmo.spaceresearch.service.api.SpaceshipService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author amifideles
@@ -27,7 +26,7 @@ import java.util.List;
 public class ExpeditionController {
     private ExpeditionService expeditionService;
     private final StationService stationService;
-
+    private final SpaceshipService spaceshipService;
     @GetMapping("/")
     public String getExpeditions(Model model) {
         String username = "username";
@@ -56,14 +55,15 @@ public class ExpeditionController {
         return "createExpeditionFirstStage";
     }
 
-    @PostMapping("/createExpeditionSecondStage")
-    public String processChooseSourceAndDestinationStation() {
-        log.info("test");
-        return "redirect:/expedition/createExpeditionSecondStage?test=1";
-    }
+
 
     @GetMapping("/createExpeditionSecondStage")
-    public String chooseSpaceship(Model model) {
-        return "index";
+    public String processChooseSourceAndDestinationStation(Model model, @RequestParam("sourceStationId") Integer sourceStationId, @RequestParam("destinationStationId") Integer destinationStationId) {
+        // Запрос на то, чтобы  получить кораблей, которые находятся в sourceStation и которые имеют право полететь на
+        Optional<StationDto> sourceStation = stationService.getStationById(sourceStationId);
+        Optional<StationDto> destinationStation = stationService.getStationById(destinationStationId);
+        model.addAttribute("sourceStation", sourceStation.get());
+        model.addAttribute("destinationStation", destinationStation.get());
+        return "createExpeditionSecondStage";
     }
 }

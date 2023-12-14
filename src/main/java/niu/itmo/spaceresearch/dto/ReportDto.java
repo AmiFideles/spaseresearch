@@ -1,8 +1,8 @@
 package niu.itmo.spaceresearch.dto;
 
-import org.springframework.lang.Nullable;
-
 import java.util.List;
+
+import org.springframework.lang.Nullable;
 
 public record ReportDto(
         @Nullable

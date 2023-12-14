@@ -8,14 +8,16 @@
 
 <h2>Station Selection Form</h2>
 
-<form th:action="@{/expedition/createExpeditionSecondStage}" method="post" th:object="stationId">
+
+<form th:action="@{/expedition/createExpeditionSecondStage}" method="post" th:object="${stationId}">
+
 
     <!-- Source Station Selection -->
     <div>
         <h3>Select Source Station:</h3>
         <div th:each="station : ${sourceStation}">
             <input type="radio" name="sourceStationId" th:id="${'sourceStation-' + station.id}"
-                   th:value="${station.id}"/>
+                   th:value="${station.id}" th:field="*{sourceStationId}"/>
             <label th:for="${'sourceStation-' + station.id}">
                 <span th:text="${station.name}"></span>
             </label>
@@ -40,7 +42,7 @@
         <h3>Select Destination Station:</h3>
         <div th:each="station : ${destinationStation}">
             <input type="radio" name="destinationStationId" th:id="${'destinationStation-' + station.id}"
-                   th:value="${station.id}"/>
+                   th:value="${station.id}" th:field="*{destinationStationId}"/>
             <label th:for="${'destinationStation-' + station.id}">
                 <span th:text="${station.name}"></span>
             </label>
