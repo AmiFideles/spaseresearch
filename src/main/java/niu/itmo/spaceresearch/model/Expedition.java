@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * @author amifideles
  */
-@EqualsAndHashCode(exclude = {"spaceship", "commander", "sourceStation", "destinationStation", "researchers"})
-@ToString(exclude = {"spaceship", "commander", "sourceStation", "destinationStation", "researchers"})
+@EqualsAndHashCode(exclude = {"spaceship", "commander", "sourceStation", "createExpeditionFirstStage", "researchers"})
+@ToString(exclude = {"spaceship", "commander", "sourceStation", "createExpeditionFirstStage", "researchers"})
 @Getter
 @Setter
 @NoArgsConstructor
