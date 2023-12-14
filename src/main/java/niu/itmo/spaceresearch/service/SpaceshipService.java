@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface SpaceshipService {
     Optional<SpaceshipDto> getSpaceshipById(Integer id);
 
-    List<SpaceshipDto> getSuitableSpaceship(Integer stationId, PlanetType planetType);
+    List<SpaceshipDto> getSuitableSpaceships(Integer stationId, PlanetType planetType);
 }

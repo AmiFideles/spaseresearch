@@ -2,7 +2,7 @@ package niu.itmo.spaceresearch.controller;
 
 import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.model.Spaceship;
-import niu.itmo.spaceresearch.service.api.SpaceshipService;
+import niu.itmo.spaceresearch.service.SpaceshipService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

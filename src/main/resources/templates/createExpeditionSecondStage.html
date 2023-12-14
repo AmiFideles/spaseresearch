@@ -1,0 +1,44 @@
+<!-- createExpeditionSecondStage.html -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Expedition - Second Stage</title>
+</head>
+<body>
+
+<!-- Display selected stations -->
+<div>
+    <h2>Selected Stations:</h2>
+    <p>Source Station: <span th:text="${sourceStation.name}"></span></p>
+    <p>Destination Station: <span th:text="${destinationStation.name}"></span></p>
+</div>
+
+<!-- Form for choosing spaceship -->
+<form th:action="@{/expedition/createExpeditionThirdStage}" method="post" th:object="chosenSpaceshipId">
+    <h2>Choose a Spaceship:</h2>
+    <input type="hidden" th:field="*{chosenSpaceshipId.sourceStationId}" th:value="${sourceStation.id}" />
+    <input type="hidden" th:field="*{chosenSpaceshipId.destinationStationId}" th:value="${destinationStation.id}" />
+
+    <!-- Display suitable spaceships with radio buttons -->
+    <div th:each="spaceship, iterStat : ${suitableSpaceships}">
+        <label>
+            <input type="radio" th:field="*{chosenSpaceshipId.spaceshipId}" th:value="${spaceship.id}"
+                   th:id="'spaceship' + ${iterStat.index}"/>
+            <span th:text="${spaceship.name}"></span><br/>
+            <span th:text="'Date of Construction: ' + ${spaceship.dateOfConstruction}"></span><br/>
+            <span th:text="'Manufacturer: ' + ${spaceship.manufacturer.name + ', ' + spaceship.manufacturer.country}"></span><br/>
+            <span th:text="'Max Speed: ' + ${spaceship.maxSpeed} + ' km/s'"></span><br/>
+            <span th:text="'Capacity: ' + ${spaceship.capacity} + ' m^3'"></span>
+        </label>
+        <br/>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
