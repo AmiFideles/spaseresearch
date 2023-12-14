@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import niu.itmo.spaceresearch.dto.StationDto;
 import niu.itmo.spaceresearch.dto.StationIdDto;
 import niu.itmo.spaceresearch.model.Expedition;
-import niu.itmo.spaceresearch.service.StationService;
+import niu.itmo.spaceresearch.service.api.StationService;
 import niu.itmo.spaceresearch.service.api.ExpeditionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

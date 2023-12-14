@@ -1,6 +1,5 @@
 package niu.itmo.spaceresearch.dto;
 
-import niu.itmo.spaceresearch.model.PlanetType;
 import org.springframework.lang.Nullable;
 
 import java.math.BigDecimal;
@@ -11,6 +10,6 @@ public record PlanetDto(
         String name,
         BigDecimal radius,
         GalaxyDto galaxy,
-        PlanetType planetType
+        PlanetTypeDto planetType
 ) {
 }

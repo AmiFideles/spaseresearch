@@ -1,4 +1,4 @@
-package niu.itmo.spaceresearch.service;
+package niu.itmo.spaceresearch.service.api;
 
 import niu.itmo.spaceresearch.dto.BreakdownDto;
 

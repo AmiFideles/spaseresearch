@@ -1,12 +1,13 @@
 package niu.itmo.spaceresearch.service.api;
 
-import niu.itmo.spaceresearch.model.Spaceship;
-import org.springframework.stereotype.Service;
+import niu.itmo.spaceresearch.dto.SpaceshipDto;
+import niu.itmo.spaceresearch.model.PlanetType;
 
-/**
- * @author amifideles
- */
-@Service
+import java.util.List;
+import java.util.Optional;
+
 public interface SpaceshipService {
-    Spaceship getSpaceshipById(Integer id);
+    Optional<SpaceshipDto> getSpaceshipById(Integer id);
+
+    List<SpaceshipDto> getSuitableSpaceship(Integer stationId, PlanetType planetType);
 }

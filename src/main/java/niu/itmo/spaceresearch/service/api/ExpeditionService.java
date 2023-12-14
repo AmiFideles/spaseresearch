@@ -1,12 +1,22 @@
 package niu.itmo.spaceresearch.service.api;
 
-import niu.itmo.spaceresearch.model.Expedition;
+import niu.itmo.spaceresearch.dto.ExpeditionDto;
 
 import java.util.List;
+import java.util.Optional;
 
-/**
- * @author amifideles
- */
 public interface ExpeditionService {
-    List<Expedition> getExpeditionsByUsername(String username);
+    void createExpedition(
+            Integer sourceStationId,
+            Integer destinationStationId,
+            Integer spaceshipId,
+            List<Integer> participantsIds,
+            Integer commanderId
+    );
+
+    List<ExpeditionDto> getAllExpeditions();
+
+    List<ExpeditionDto> getResearcherExpeditions(Integer researcherId);
+
+    Optional<ExpeditionDto> getExpeditionById(Integer id);
 }

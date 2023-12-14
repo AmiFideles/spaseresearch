@@ -48,7 +48,7 @@ public class Spaceship {
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id", nullable = false)
-    private Manufacture manufacturer;
+    private Manufacturer manufacturer;
 
     @OneToMany(mappedBy = "spaceship")
     private List<Cabins> cabins;
