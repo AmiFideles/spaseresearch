@@ -1,8 +1,9 @@
 package niu.itmo.spaceresearch.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import niu.itmo.spaceresearch.dto.StationDto;
+import niu.itmo.spaceresearch.dto.StationIdDto;
 import niu.itmo.spaceresearch.model.Expedition;
 import niu.itmo.spaceresearch.service.StationService;
 import niu.itmo.spaceresearch.service.api.ExpeditionService;
@@ -21,6 +22,7 @@ import java.util.List;
  */
 @RequestMapping("/expedition")
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 public class ExpeditionController {
     private ExpeditionService expeditionService;
@@ -44,20 +46,19 @@ public class ExpeditionController {
         return "expeditionDescription";
     }
 
-
     @GetMapping("/createExpeditionFirstStage")
     public String chooseSourceAndDestinationStation(Model model) {
         List<StationDto> sourceStation = stationService.getAllStations();
         model.addAttribute("sourceStation", sourceStation);
         List<StationDto> destinationStation = stationService.getAllStations();
         model.addAttribute("destinationStation", destinationStation);
+        model.addAttribute("stationId", new StationIdDto());
         return "createExpeditionFirstStage";
     }
 
-
     @PostMapping("/createExpeditionSecondStage")
-    public String processChooseSourceAndDestinationStation(HttpServletRequest request) {
-        System.out.println("test");
+    public String processChooseSourceAndDestinationStation() {
+        log.info("test");
         return "redirect:/expedition/createExpeditionSecondStage?test=1";
     }
 
@@ -65,6 +66,4 @@ public class ExpeditionController {
     public String chooseSpaceship(Model model) {
         return "index";
     }
-
-
 }

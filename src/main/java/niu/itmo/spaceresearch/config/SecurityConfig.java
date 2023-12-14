@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
+                                .requestMatchers("/expedition/**").permitAll()
                                 .requestMatchers("/users").hasAuthority("ADMIN")
                 ).formLogin(
                         form -> form

@@ -95,5 +95,3 @@ DROP TABLE IF EXISTS PlanetTypes;
 DROP TABLE IF EXISTS Breakdowntypes;
 
 DROP TABLE IF EXISTS Researchers;
-
-DROP TYPE  ExpeditionStatus;

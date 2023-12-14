@@ -8,7 +8,7 @@
 
 <h2>Station Selection Form</h2>
 
-<form action="/expedition/createExpeditionSecondStage" method="post">
+<form th:action="@{/expedition/createExpeditionSecondStage}" method="post" th:object="stationId">
 
     <!-- Source Station Selection -->
     <div>

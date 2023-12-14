@@ -27,5 +27,4 @@ public class PlanetType {
     private List<Planet> planetType;
     @ManyToMany(mappedBy = "planetTypes")
     private List<Spaceship> spaceships;
-
 }

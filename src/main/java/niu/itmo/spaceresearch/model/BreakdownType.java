@@ -25,6 +25,4 @@ public class BreakdownType {
     private String name;
     @ManyToMany(mappedBy = "breakdownTypes")
     private List<Report> reports;
-
-
 }

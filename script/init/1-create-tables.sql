@@ -86,9 +86,6 @@ CREATE TABLE IF NOT EXISTS Researchers
     password      VARCHAR(255)       NOT NULL CHECK (LENGTH(password) > 6)
 );
 
--- Enum для статуса экспедиции
-CREATE TYPE ExpeditionStatus AS ENUM ('IN_PROGRESS', 'LANDED', 'COMPLETED');
-
 -- Таблица "Экспедиция"
 CREATE TABLE IF NOT EXISTS Expeditions
 (
@@ -96,10 +93,10 @@ CREATE TABLE IF NOT EXISTS Expeditions
     spaceship_id           INT NOT NULL,
     commander_id           INT NOT NULL,
     source_station_id      INT NOT NULL,
-    destination_station_id INT NOT NULL,                           -- Внешний ключ к таблице "Planets" для указания планеты назначения
-    status                 ExpeditionStatus DEFAULT 'IN_PROGRESS', -- Статус экспедиции
-    departure_time         TIMESTAMP        DEFAULT NOW(),         -- Время отправления
-    end_time               TIMESTAMP        DEFAULT NULL,          -- Время завершения экспедиции
+    destination_station_id INT NOT NULL,                       -- Внешний ключ к таблице "Planets" для указания планеты назначения
+    status                 varchar(255) DEFAULT 'IN_PROGRESS', -- Статус экспедиции
+    departure_time         TIMESTAMP    DEFAULT NOW(),         -- Время отправления
+    end_time               TIMESTAMP    DEFAULT NULL,          -- Время завершения экспедиции
     FOREIGN KEY (spaceship_id) REFERENCES Spaceships (spaceship_id),
     FOREIGN KEY (commander_id) REFERENCES Researchers (researcher_id),
     FOREIGN KEY (destination_station_id) REFERENCES Stations (station_id),

@@ -2,15 +2,13 @@ package niu.itmo.spaceresearch.service;
 
 import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.UserDto;
-import niu.itmo.spaceresearch.model.Profession;
-import niu.itmo.spaceresearch.model.Researcher;
 import niu.itmo.spaceresearch.model.Gender;
+import niu.itmo.spaceresearch.model.Researcher;
 import niu.itmo.spaceresearch.repository.ProfessionRepository;
 import niu.itmo.spaceresearch.repository.ResearcherRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 

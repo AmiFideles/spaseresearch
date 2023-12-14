@@ -5,5 +5,12 @@ package niu.itmo.spaceresearch.model;
  */
 public enum Gender {
     MALE,
-    FEMALE
+    FEMALE;
+
+    public String toRussian() {
+        return switch (this) {
+            case MALE -> "Мужчина";
+            case FEMALE -> "Женщина";
+        };
+    }
 }

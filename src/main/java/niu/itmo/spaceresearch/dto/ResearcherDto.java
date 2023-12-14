@@ -8,8 +8,8 @@ import java.util.List;
 public record ResearcherDto(
         @Nullable
         Integer id,
-        String name,
-        String surname,
+        String firstName,
+        String lastName,
         Integer age,
         Gender gender,
         @Nullable
