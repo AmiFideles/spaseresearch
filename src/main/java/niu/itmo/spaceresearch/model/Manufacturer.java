@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "manufacturers")
 @Entity
-public class Manufacture {
+public class Manufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "manufacturer_id")

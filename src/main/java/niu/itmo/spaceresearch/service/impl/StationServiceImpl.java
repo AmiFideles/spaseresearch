@@ -3,7 +3,7 @@ package niu.itmo.spaceresearch.service.impl;
 import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.StationDto;
 import niu.itmo.spaceresearch.repository.StationRepository;
-import niu.itmo.spaceresearch.service.StationService;
+import niu.itmo.spaceresearch.service.api.StationService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

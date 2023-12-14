@@ -14,11 +14,11 @@ public record SpaceshipDto(
         LocalDate dateOfConstruction,
         BigDecimal maxSpeed,
         Integer capacity,
-        ManufactureDto manufacturer,
+        ManufacturerDto manufacturer,
         List<CabinDto> cabins,
         @Nullable
         Boolean inExpedition,
         @Nullable
-        Station currentStation
+        StationDto currentStation
 ) {
 }

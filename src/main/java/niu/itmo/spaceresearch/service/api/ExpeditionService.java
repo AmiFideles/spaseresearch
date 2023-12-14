@@ -1,4 +1,4 @@
-package niu.itmo.spaceresearch.service;
+package niu.itmo.spaceresearch.service.api;
 
 import niu.itmo.spaceresearch.dto.ExpeditionDto;
 
@@ -15,6 +15,8 @@ public interface ExpeditionService {
     );
 
     List<ExpeditionDto> getAllExpeditions();
+
+    List<ExpeditionDto> getResearcherExpeditions(Integer researcherId);
 
     Optional<ExpeditionDto> getExpeditionById(Integer id);
 }
