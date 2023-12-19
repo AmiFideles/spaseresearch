@@ -2,8 +2,8 @@ package niu.itmo.spaceresearch.service.mock;
 
 import niu.itmo.spaceresearch.dto.ManufacturerDto;
 import niu.itmo.spaceresearch.dto.SpaceshipDto;
-import niu.itmo.spaceresearch.model.PlanetType;
 import niu.itmo.spaceresearch.service.api.SpaceshipService;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Primary
 @Service
 public class SpaceshipServiceMock implements SpaceshipService {
     public static SpaceshipDto mockSpaceship(Integer id) {
@@ -41,7 +42,7 @@ public class SpaceshipServiceMock implements SpaceshipService {
     }
 
     @Override
-    public List<SpaceshipDto> getSuitableSpaceship(Integer stationId, PlanetType planetType) {
+    public List<SpaceshipDto> getSuitableSpaceships(Integer stationId, Integer planetTypeId) {
         return List.of(
                 mockSpaceship(1),
                 mockSpaceship(2),

@@ -1,0 +1,84 @@
+<!-- createExpeditionThirdStage.html -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Expedition - Third Stage</title>
+</head>
+<body>
+
+<!-- Display selected stations and spaceship information -->
+<div>
+    <h2>Selected Stations:</h2>
+    <p>Source Station: <span th:text="${sourceStation.name}"></span></p>
+    <p>Destination Station: <span th:text="${destinationStation.name}"></span></p>
+</div>
+<div>
+    <h2>Selected Spaceship:</h2>
+    <p>Name: <span th:text="${spaceshipDto.name}"></span></p>
+    <p>Date of Construction: <span th:text="${spaceshipDto.dateOfConstruction}"></span></p>
+    <p>Manufacturer: <span th:text="${spaceshipDto.manufacturer.name}"></span></p>
+    <p>Max Speed: <span th:text="${spaceshipDto.maxSpeed} km/s"></span></p>
+    <p>Capacity: <span th:text="${spaceshipDto.capacity} m^3"></span></p>
+</div>
+
+<!-- Form for choosing researchers -->
+<form id="expeditionForm">
+    <h2>Choose Researchers:</h2>
+
+    <!-- Display available researchers with checkboxes -->
+    <div th:each="researcher, iterStat : ${availableResearchers}">
+        <label>
+            <input type="checkbox" name="selectedResearchers" value="${researcher.id}"
+                   id="'researcher' + ${iterStat.index}" />
+            <span th:text="${researcher.name}"></span><br/>
+        </label>
+    </div>
+
+    <!-- Submit button -->
+    <button type="button" onclick="submitForm()">Submit</button>
+</form>
+
+<!-- JavaScript code -->
+<script>
+    function submitForm() {
+        // Create a JSON object with selected data
+        var formData = {
+            "sourceStationId": "${sourceStation.id}",
+            "destinationStationId": "${destinationStation.id}",
+            "spaceshipId": "${spaceshipDto.id}",
+            "selectedResearchers": getSelectedResearchers()
+        };
+
+        // Perform a POST request with the JSON data
+        fetch('/expedition/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        }).then(response => {
+            // Handle the response as needed
+            console.log(response);
+        }).catch(error => {
+            // Handle errors
+            console.error('Error:', error);
+        });
+    }
+
+    function getSelectedResearchers() {
+        var checkboxes = document.getElementsByName('selectedResearchers');
+        var selectedResearchers = [];
+        checkboxes.forEach(function (checkbox) {
+            if (checkbox.checked) {
+                selectedResearchers.push(checkbox.value);
+            }
+        });
+        return selectedResearchers;
+    }
+</script>
+
+</body>
+</html>

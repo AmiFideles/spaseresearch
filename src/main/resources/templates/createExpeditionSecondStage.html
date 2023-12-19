@@ -17,18 +17,22 @@
 </div>
 
 <!-- Form for choosing spaceship -->
-<form th:action="@{/expedition/createExpeditionThirdStage}" method="post" th:object="chosenSpaceshipId">
+<form th:action="@{/expedition/createExpeditionThirdStage}" method="post" th:object="${chosenSpaceshipId}">
     <h2>Choose a Spaceship:</h2>
-    <input type="hidden" th:field="*{chosenSpaceshipId.sourceStationId}" th:value="${sourceStation.id}" />
-    <input type="hidden" th:field="*{chosenSpaceshipId.destinationStationId}" th:value="${destinationStation.id}" />
+    <label>
+        <input type="number"  th:field="*{sourceStationId}" th:value="${sourceStation.id}" checked/>
+    </label>
+    <label>
+        <input type="number"  th:field="*{destinationStationId}" value="4" checked />
+    </label>
 
     <!-- Display suitable spaceships with radio buttons -->
     <div th:each="spaceship, iterStat : ${suitableSpaceships}">
         <label>
-            <input type="radio" th:field="*{chosenSpaceshipId.spaceshipId}" th:value="${spaceship.id}"
+            <input type="radio" th:field="*{spaceshipId}" th:value="${spaceship.id()}"
                    th:id="'spaceship' + ${iterStat.index}"/>
-            <span th:text="${spaceship.name}"></span><br/>
-            <span th:text="'Date of Construction: ' + ${spaceship.dateOfConstruction}"></span><br/>
+            <span th:text="${spaceship.name()}"></span><br/>
+            <span th:text="'Date of Construction: ' + ${spaceship.dateOfConstruction()}"></span><br/>
             <span th:text="'Manufacturer: ' + ${spaceship.manufacturer.name + ', ' + spaceship.manufacturer.country}"></span><br/>
             <span th:text="'Max Speed: ' + ${spaceship.maxSpeed} + ' km/s'"></span><br/>
             <span th:text="'Capacity: ' + ${spaceship.capacity} + ' m^3'"></span>
