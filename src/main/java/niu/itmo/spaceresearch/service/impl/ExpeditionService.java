@@ -4,12 +4,14 @@ import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.request.ExpeditionRequestDto;
 import niu.itmo.spaceresearch.dto.response.expedition.DetailedExpeditionDto;
 import niu.itmo.spaceresearch.dto.response.expedition.SimpleExpeditionDto;
+import niu.itmo.spaceresearch.mapper.ExpeditionMapper;
 import niu.itmo.spaceresearch.model.Expedition;
 import niu.itmo.spaceresearch.model.Researcher;
 import niu.itmo.spaceresearch.model.Station;
 import niu.itmo.spaceresearch.repository.ExpeditionRepository;
 import niu.itmo.spaceresearch.repository.ResearcherRepository;
 import niu.itmo.spaceresearch.repository.StationRepository;
+import niu.itmo.spaceresearch.service.exceptions.ExpeditionNotFoundException;
 import niu.itmo.spaceresearch.service.exceptions.ResearcherNotFound;
 import niu.itmo.spaceresearch.service.exceptions.StationNotFound;
 import org.springframework.stereotype.Service;
@@ -72,8 +74,8 @@ public class ExpeditionService {
         return toListSimpleExpeditionDto(expeditions);
     }
 
-    public Optional<DetailedExpeditionDto> getExpeditionById(Integer id) {
-        Optional<Expedition> expedition = expeditionRepository.findById(id);
-        return null;
+    public DetailedExpeditionDto getExpeditionById(Integer id) {
+        Expedition expedition = expeditionRepository.findById(id).orElseThrow(() -> new ExpeditionNotFoundException("Station not found with ID: " + id));
+        return ExpeditionMapper.toDetailedExpeditionDto(expedition);
     }
 }

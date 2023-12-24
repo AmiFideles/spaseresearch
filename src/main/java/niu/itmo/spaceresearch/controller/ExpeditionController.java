@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author amifideles
@@ -28,20 +27,19 @@ public class ExpeditionController {
         return ResponseEntity.ok("string");
     }
 
-    @PostMapping()
+    @PostMapping("")
     public ResponseEntity<?> createExpedition(ExpeditionRequestDto expeditionRequestDto) {
         expeditionService.createExpedition(expeditionRequestDto);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/test/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<DetailedExpeditionDto> getExpeditionById(@PathVariable Integer id) {
-        Optional<DetailedExpeditionDto> expedition = expeditionService.getExpeditionById(id);
-        return expedition.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        DetailedExpeditionDto expedition = expeditionService.getExpeditionById(id);
+        return ResponseEntity.ok(expedition);
     }
 
-    @GetMapping("/list")
+    @GetMapping("/")
     public ResponseEntity<List<SimpleExpeditionDto>> getResearcherExpeditions(Principal principal) {
         List<SimpleExpeditionDto> expeditions = expeditionService.getResearcherExpeditions(principal);
         return ResponseEntity.ok(expeditions);
