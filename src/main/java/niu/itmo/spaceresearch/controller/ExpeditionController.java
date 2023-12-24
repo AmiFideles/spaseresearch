@@ -2,12 +2,14 @@ package niu.itmo.spaceresearch.controller;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
-import niu.itmo.spaceresearch.dto.response.expedition.DetailedExpeditionDto;
 import niu.itmo.spaceresearch.dto.request.ExpeditionRequestDto;
-import niu.itmo.spaceresearch.service.api.ExpeditionService;
+import niu.itmo.spaceresearch.dto.response.expedition.DetailedExpeditionDto;
+import niu.itmo.spaceresearch.dto.response.expedition.SimpleExpeditionDto;
+import niu.itmo.spaceresearch.service.impl.ExpeditionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,16 +34,16 @@ public class ExpeditionController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/test/{id}")
     public ResponseEntity<DetailedExpeditionDto> getExpeditionById(@PathVariable Integer id) {
         Optional<DetailedExpeditionDto> expedition = expeditionService.getExpeditionById(id);
         return expedition.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/researcher/{researcherId}")
-    public ResponseEntity<List<DetailedExpeditionDto>> getResearcherExpeditions(@PathVariable Integer researcherId) {
-        List<DetailedExpeditionDto> expeditions = expeditionService.getResearcherExpeditions(researcherId);
+    @GetMapping("/list")
+    public ResponseEntity<List<SimpleExpeditionDto>> getResearcherExpeditions(Principal principal) {
+        List<SimpleExpeditionDto> expeditions = expeditionService.getResearcherExpeditions(principal);
         return ResponseEntity.ok(expeditions);
     }
 }

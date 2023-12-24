@@ -36,7 +36,9 @@ public class ExpeditionMapper {
                 .build();
     }
 
-
+    public static List<SimpleExpeditionDto> toListSimpleExpeditionDto(List<Expedition> expeditions){
+        return expeditions.stream().map(ExpeditionMapper::toSimpleExpeditionDto).collect(Collectors.toList());
+    }
 
     private static List<ResearcherDto> mapResearchersToDto(List<Researcher> researchers) {
         return researchers.stream()
