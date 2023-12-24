@@ -1,7 +1,8 @@
 import Header from "./base/Header";
-import {Placeholder, Table} from "react-bootstrap";
+import {Button, Placeholder, Table} from "react-bootstrap";
 import {useGetExpeditionsQuery} from "../api/resourceApi";
 import {LoadError} from "./util/LoadError";
+import {Link} from "react-router-dom";
 
 export function Expeditions() {
     const {data, isLoading, isError} = useGetExpeditionsQuery()
@@ -13,29 +14,33 @@ export function Expeditions() {
                 <div className="h3 text-center">
                     Your Expeditions
                 </div>
-                <Table striped borderless hover className="m-0">
-                    <thead style={{position: "sticky", top: "0", backgroundColor: "white"}}>
-                    <tr className={"text-center"}>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Start</th>
-                        <th>Finish</th>
-                        <th>Button</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {isError ? <LoadError/> :
-                        isLoading ? <Placeholder xs={6}/> :
+                {isError ? <LoadError/> : isLoading ? <Placeholder xs={6}/> :
+                    <Table striped borderless hover className="m-0 text-center">
+                        <thead style={{position: "sticky", top: "0", backgroundColor: "white"}}>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Start</th>
+                            <th>Finish</th>
+                            <th>Button</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
                             data.length !== 0 ?
                                 data.map(el => (
                                     <tr key={el.id}>
-                                        <td>{el.id}</td>
+                                        <td>Expedition #{el.id}</td>
+                                        <td>{el.status}</td>
+                                        <td>{el.departureTime}</td>
+                                        <td>{el.endTime ? el.endTime : "Not yet"}</td>
+                                        <td><Button variant="success" as={Link} to={`/expeditions/${el.id}`}>></Button></td>
                                     </tr>
                                 )) :
                                 null
-                    }
-                    </tbody>
-                </Table>
+                        }
+                        </tbody>
+                    </Table>}
             </div>
         </div>
     )
