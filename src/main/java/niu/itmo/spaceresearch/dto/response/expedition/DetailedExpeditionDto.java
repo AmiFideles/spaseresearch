@@ -1,6 +1,9 @@
-package niu.itmo.spaceresearch.dto;
+package niu.itmo.spaceresearch.dto.response.expedition;
 
 import lombok.Builder;
+import niu.itmo.spaceresearch.dto.ReportDto;
+import niu.itmo.spaceresearch.dto.ResearcherDto;
+import niu.itmo.spaceresearch.dto.SpaceshipDto;
 import niu.itmo.spaceresearch.dto.response.station.SimpleStationDto;
 import niu.itmo.spaceresearch.model.ExpeditionStatus;
 import org.springframework.lang.Nullable;
@@ -9,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
-public record ExpeditionResponseDto(
+public record DetailedExpeditionDto(
         @Nullable
         Integer id,
         ExpeditionStatus status,

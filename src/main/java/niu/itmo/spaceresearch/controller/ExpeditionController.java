@@ -2,7 +2,7 @@ package niu.itmo.spaceresearch.controller;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
-import niu.itmo.spaceresearch.dto.ExpeditionResponseDto;
+import niu.itmo.spaceresearch.dto.response.expedition.DetailedExpeditionDto;
 import niu.itmo.spaceresearch.dto.request.ExpeditionRequestDto;
 import niu.itmo.spaceresearch.service.api.ExpeditionService;
 import org.springframework.http.ResponseEntity;
@@ -28,26 +28,20 @@ public class ExpeditionController {
 
     @PostMapping()
     public ResponseEntity<?> createExpedition(ExpeditionRequestDto expeditionRequestDto) {
-        expeditionService.createExpeditionUsingFunction(expeditionRequestDto);
+        expeditionService.createExpedition(expeditionRequestDto);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping()
-    public ResponseEntity<List<ExpeditionResponseDto>> getAllExpeditions() {
-        List<ExpeditionResponseDto> expeditions = expeditionService.getAllExpeditions();
-        return ResponseEntity.ok(expeditions);
-    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<ExpeditionResponseDto> getExpeditionById(@PathVariable Integer id) {
-        Optional<ExpeditionResponseDto> expedition = expeditionService.getExpeditionById(id);
+    public ResponseEntity<DetailedExpeditionDto> getExpeditionById(@PathVariable Integer id) {
+        Optional<DetailedExpeditionDto> expedition = expeditionService.getExpeditionById(id);
         return expedition.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/researcher/{researcherId}")
-    public ResponseEntity<List<ExpeditionResponseDto>> getResearcherExpeditions(@PathVariable Integer researcherId) {
-        List<ExpeditionResponseDto> expeditions = expeditionService.getResearcherExpeditions(researcherId);
+    public ResponseEntity<List<DetailedExpeditionDto>> getResearcherExpeditions(@PathVariable Integer researcherId) {
+        List<DetailedExpeditionDto> expeditions = expeditionService.getResearcherExpeditions(researcherId);
         return ResponseEntity.ok(expeditions);
     }
 }

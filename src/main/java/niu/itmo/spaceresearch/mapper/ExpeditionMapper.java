@@ -1,7 +1,8 @@
 package niu.itmo.spaceresearch.mapper;
 
-import niu.itmo.spaceresearch.dto.ExpeditionResponseDto;
+import niu.itmo.spaceresearch.dto.response.expedition.DetailedExpeditionDto;
 import niu.itmo.spaceresearch.dto.ResearcherDto;
+import niu.itmo.spaceresearch.dto.response.expedition.SimpleExpeditionDto;
 import niu.itmo.spaceresearch.model.Expedition;
 import niu.itmo.spaceresearch.model.Researcher;
 
@@ -12,8 +13,8 @@ import java.util.stream.Collectors;
  * @author amifideles
  */
 public class ExpeditionMapper {
-    ExpeditionResponseDto toResponseDto(Expedition expedition) {
-        return ExpeditionResponseDto.builder()
+    public static DetailedExpeditionDto toDetailedExpeditionDto(Expedition expedition) {
+        return DetailedExpeditionDto.builder()
                 .id(expedition.getId())
                 .status(expedition.getExpeditionStatus())
                 .departureTime(expedition.getDepartureTime())
@@ -26,7 +27,18 @@ public class ExpeditionMapper {
                 .build();
     }
 
-    private List<ResearcherDto> mapResearchersToDto(List<Researcher> researchers) {
+    public static SimpleExpeditionDto toSimpleExpeditionDto(Expedition expedition){
+        return SimpleExpeditionDto.builder()
+                .id(expedition.getId())
+                .status(expedition.getExpeditionStatus())
+                .departureTime(expedition.getDepartureTime())
+                .endTime(expedition.getEndTime())
+                .build();
+    }
+
+
+
+    private static List<ResearcherDto> mapResearchersToDto(List<Researcher> researchers) {
         return researchers.stream()
                 .map(ResearcherMapper::toDto)
                 .collect(Collectors.toList());

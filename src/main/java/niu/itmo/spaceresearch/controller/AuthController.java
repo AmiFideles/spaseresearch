@@ -3,6 +3,7 @@ package niu.itmo.spaceresearch.controller;
 import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.request.AuthRequest;
 import niu.itmo.spaceresearch.dto.request.ResearcherRequestDto;
+import niu.itmo.spaceresearch.dto.response.LoginResponseDto;
 import niu.itmo.spaceresearch.service.api.ResearcherService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,9 +26,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<LoginResponseDto> login(@RequestBody AuthRequest authRequest) {
         String credentials = researcherService.login(authRequest);
-        return ResponseEntity.ok(credentials);
+        return ResponseEntity.ok(new LoginResponseDto(credentials));
     }
 
     @GetMapping("test")

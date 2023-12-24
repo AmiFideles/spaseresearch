@@ -97,27 +97,27 @@ VALUES
 -- Заполнение таблицы "Expeditions"
 INSERT INTO Expeditions (expedition_id, spaceship_id, commander_id, source_station_id, destination_station_id, status, departure_time, end_time)
 VALUES
-    (1, 1, 1, 1, 4, 'IN_PROGRESS', '2022-01-01 08:00:00', NULL);
---     (2, 2, 2, 1, 2, 'IN_PROGRESS', '2022-02-01 10:00:00', NULL),
---     (3, 3, 3, 1, 3, 'IN_PROGRESS', '2022-03-01 12:00:00', NULL),
---     (4, 4, 4, 1, 4, 'IN_PROGRESS', '2022-04-01 14:00:00', NULL);
+    (1, 1, 1, 1, 4, 'IN_PROGRESS', '2022-01-01 08:00:00', NULL),
+    (2, 2, 2, 1, 2, 'IN_PROGRESS', '2022-02-01 10:00:00', NULL),
+    (3, 3, 3, 1, 3, 'IN_PROGRESS', '2022-03-01 12:00:00', NULL),
+    (4, 4, 4, 1, 4, 'IN_PROGRESS', '2022-04-01 14:00:00', NULL);
 
 
--- -- Заполнение таблицы "ExpeditionResearchers"
--- INSERT INTO ExpeditionResearchers (expedition_id, researcher_id)
--- VALUES
---     (1, 1),
---     (2, 2),
---     (3, 3),
---     (4, 4);
+-- Заполнение таблицы "ExpeditionResearchers"
+INSERT INTO ExpeditionResearchers (expedition_id, researcher_id)
+VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4);
 
--- -- Заполнение таблицы "Reports"
--- INSERT INTO Reports (report_id, expedition_id, description)
--- VALUES
---     (1, 1, 'Initial report for expedition 1'),
---     (2, 2, 'Initial report for expedition 2'),
---     (3, 3, 'Initial report for expedition 3'),
---     (4, 4, 'Initial report for expedition 4');
+-- Заполнение таблицы "Reports"
+INSERT INTO Reports (report_id, expedition_id, description)
+VALUES
+    (1, 1, 'Initial report for expedition 1'),
+    (2, 2, 'Initial report for expedition 2'),
+    (3, 3, 'Initial report for expedition 3'),
+    (4, 4, 'Initial report for expedition 4');
 
 -- Заполнение таблицы "BreakdownTypes"
 INSERT INTO BreakdownTypes (breakdown_type_id, name)
@@ -127,10 +127,10 @@ VALUES
     (3, 'Navigation Failure'),
     (4, 'Communication Failure');
 
--- -- Заполнение таблицы "ReportsBreakdowns"
--- INSERT INTO ReportsBreakdowns (report_id, breakdown_type_id)
--- VALUES
---     (1, 1),
---     (2, 2),
---     (3, 3),
---     (4, 4);
+-- Заполнение таблицы "ReportsBreakdowns"
+INSERT INTO ReportsBreakdowns (report_id, breakdown_type_id)
+VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4);

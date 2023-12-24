@@ -1,7 +1,7 @@
 package niu.itmo.spaceresearch.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import niu.itmo.spaceresearch.dto.ExpeditionResponseDto;
+import niu.itmo.spaceresearch.dto.response.expedition.DetailedExpeditionDto;
 import niu.itmo.spaceresearch.dto.request.ExpeditionRequestDto;
 import niu.itmo.spaceresearch.model.Expedition;
 import niu.itmo.spaceresearch.model.Researcher;
@@ -62,17 +62,19 @@ public class ExpeditionServiceImpl implements ExpeditionService {
     }
 
     @Override
-    public List<ExpeditionResponseDto> getAllExpeditions() {
+    public List<DetailedExpeditionDto> getAllExpeditions() {
         return null;
     }
 
     @Override
-    public List<ExpeditionResponseDto> getResearcherExpeditions(Integer researcherId) {
+    public List<DetailedExpeditionDto> getResearcherExpeditions(Integer researcherId) {
+        List<Expedition> researcher = expeditionRepository.findExpeditionsByResearcherId(researcherId);
+
         return null;
     }
 
     @Override
-    public Optional<ExpeditionResponseDto> getExpeditionById(Integer id) {
+    public Optional<DetailedExpeditionDto> getExpeditionById(Integer id) {
         return Optional.empty();
     }
 }
