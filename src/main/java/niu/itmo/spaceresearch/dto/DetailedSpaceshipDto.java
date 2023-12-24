@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Builder
-public record SpaceshipDto(
+public record DetailedSpaceshipDto(
         @Nullable
         Integer id,
         String name,

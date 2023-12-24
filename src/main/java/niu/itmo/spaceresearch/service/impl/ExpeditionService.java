@@ -64,10 +64,6 @@ public class ExpeditionService {
         expeditionRepository.save(expedition);
     }
 
-    public List<DetailedExpeditionDto> getAllExpeditions() {
-        return null;
-    }
-
     public List<SimpleExpeditionDto> getResearcherExpeditions(Principal principal) {
         Researcher researcher = researcherRepository.findByUsername(principal.getName()).orElseThrow(() -> new ResearcherNotFound("Researcher not found with username: %s".formatted(principal.getName())));
         List<Expedition> expeditions = expeditionRepository.findExpeditionsByResearcherId(researcher.getId());

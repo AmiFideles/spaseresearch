@@ -23,7 +23,7 @@ public class ExpeditionMapper {
                 .sourceStation(StationMapper.mapToSimpleDto(expedition.getSourceStation()))
                 .destinationStation(StationMapper.mapToSimpleDto(expedition.getDestinationStation()))
                 .participants(mapResearchersToDto(expedition.getResearchers()))
-                .spaceship(SpaceshipMapper.toSimpleDto(expedition.getSpaceship()))
+                .spaceship(SpaceshipMapper.toSimpleSpaceshipDto(expedition.getSpaceship()))
                 .build();
     }
 

@@ -3,7 +3,7 @@ package niu.itmo.spaceresearch.dto.response.expedition;
 import lombok.Builder;
 import niu.itmo.spaceresearch.dto.ReportDto;
 import niu.itmo.spaceresearch.dto.ResearcherDto;
-import niu.itmo.spaceresearch.dto.SpaceshipDto;
+import niu.itmo.spaceresearch.dto.response.spaceship.SimpleSpaceshipDto;
 import niu.itmo.spaceresearch.dto.response.station.SimpleStationDto;
 import niu.itmo.spaceresearch.model.ExpeditionStatus;
 import org.springframework.lang.Nullable;
@@ -24,6 +24,6 @@ public record DetailedExpeditionDto(
         SimpleStationDto sourceStation,
         SimpleStationDto destinationStation,
         List<ResearcherDto> participants,
-        SpaceshipDto spaceship
+        SimpleSpaceshipDto spaceship
 ) {
 }
