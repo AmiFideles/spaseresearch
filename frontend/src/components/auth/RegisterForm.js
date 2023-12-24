@@ -16,25 +16,34 @@ export function RegisterForm() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [age, setAge] = useState("");
-    const [sex, setSex] = useState("");
+    const [gender, setGender] = useState("MALE");
     const [professions, setProfessions] = useState([]);
 
     const onUsernameChanged = (e) => setUsername(e.target.value);
     const onPasswordChanged = (e) => setPassword(e.target.value);
-    const onSexChanged = (e) => setSex(e.target.value);
+    const onGenderChanged = (e) => setGender(e.target.value);
     const onFirstNameChanged = (e) => setFirstName(e.target.value);
     const onLastNameChanged = (e) => setLastName(e.target.value);
-    const onAgeChanged = (e) => console.log(e);
-    const onProfessionsChanged = (e) => console.log(e.target);
+    const onAgeChanged = (e) => setAge(e.target.value);
+    const onProfessionsChanged = (e) => {
+        const checked = e.target.checked;
+        const id = e.target.value;
+        if (checked) {
+            setProfessions([...professions, id]);
+        } else {
+            setProfessions(professions.filter(el => el !== id));
+        }
+    }
 
     const dispatch = useDispatch()
     const [errorMessage, setErrorMessage] = useState("");
     const [showErrorMessage, setShowErrorMessage] = useState(false);
-    const [register, {isLoading}] = useRegisterMutation()
-    const {data, professionIsLoading, professionIsError} = useGetProfessionsQuery()
-    const [validated, setValidated] = useState(false)
-
-    const handleReset = () => setValidated(false)
+    const [register, {isLoading: registerIsLoading}] = useRegisterMutation()
+    const {
+        data: data,
+        isLoading: professionIsLoading,
+        isError: professionIsError,
+    } = useGetProfessionsQuery()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -45,11 +54,13 @@ export function RegisterForm() {
                 return
             }
             await register({
-                username: username,
-                password: password,
                 firstName: firstName,
                 lastName: lastName,
-                sex: sex
+                username: username,
+                password: password,
+                age: age,
+                gender: gender,
+                professions: professions
             }).unwrap()
             dispatch(push("/login"))
         } catch (err) {
@@ -61,8 +72,6 @@ export function RegisterForm() {
             setShowErrorMessage(true)
         }
     }
-
-    // console.log(professionIsError, professionIsLoading, data)
 
     return (
         <Form style={{width: 400}}
@@ -94,19 +103,19 @@ export function RegisterForm() {
                               onChange={onLastNameChanged}/>
             </Form.Group>
             <Form.Group>
-                <Form.Label className="text-muted">Sex</Form.Label>
-                <div key={"sex-radio"} className="mb-3" onChange={onSexChanged}>
+                <Form.Label className="text-muted">Gender</Form.Label>
+                <div key={"gender-radio"} className="mb-3" onChange={onGenderChanged}>
                     <Form.Check
-                        value="Male"
-                        name="sex-radio"
+                        value="MALE"
+                        name="gender-radio"
                         type="radio"
                         id="male-radio"
                         label="male"
                         defaultChecked={true}
                     />
                     <Form.Check
-                        value="Female"
-                        name="sex-radio"
+                        value="FEMALE"
+                        name="gender-radio"
                         type="radio"
                         id="female-radio"
                         label="female"
@@ -115,29 +124,33 @@ export function RegisterForm() {
             </Form.Group>
             <Form.Group className={"mb-2"}>
                 <Form.Label className="text-muted">Age</Form.Label>
-                <Form.Control required maxLength={255} min={18} max={100} type="number" name="age" onChange={onAgeChanged}/>
+                <Form.Control required maxLength={255} min={18} max={100} type="number" name="age"
+                              onChange={onAgeChanged}/>
             </Form.Group>
-            {professionIsError ? <LoadError/> :
-                professionIsLoading ? <Placeholder xs={6}/> :
-                    <Form.Group>
-                        <Form.Label className="text-muted">Professions</Form.Label>
-                        <div key={"inline-"} className="mb-3">
-                            {/*{data.map(el => (*/}
-                            {/*    <Form.Check*/}
-                            {/*        onChange={onProfessionsChanged}*/}
-                            {/*        label={el.name}*/}
-                            {/*        value={el.id}*/}
-                            {/*        name="profession-checkbox"*/}
-                            {/*        type="checkbox"*/}
-                            {/*    />*/}
-                            {/*))}*/}
-                        </div>
-                    </Form.Group>}
             <Form.Group>
-                {isLoading ?
+                <Form.Label className="text-muted">Professions</Form.Label>
+                <div key={"inline-"} className="mb-3">
+                    {professionIsError ? <LoadError/> :
+                        professionIsLoading ? <Placeholder xs={6}/> :
+                            data.map(el => (
+                                <Form.Check
+                                    key={el.id}
+                                    onChange={onProfessionsChanged}
+                                    label={el.name}
+                                    value={el.id}
+                                    name="profession-checkbox"
+                                    type="checkbox"
+                                />
+                            ))
+                    }
+                </div>
+            </Form.Group>
+            <Form.Group>
+                {registerIsLoading ?
                     <LoadingButton className="w-100" variant="success"/> :
                     <Button className="w-100" variant="success" type="submit"
-                            disabled={username === "" || password === "" || firstName === "" || lastName === ""}>Sign up</Button>
+                            disabled={username === "" || password === "" || firstName === "" || lastName === ""}>Sign
+                        up</Button>
                 }
             </Form.Group>
         </Form>

@@ -29,9 +29,10 @@ export function LoginForm() {
         e.preventDefault()
         try {
             const result = await login({username: username, password: password}).unwrap()
-            dispatch(loginResult(result.token))
+            dispatch(loginResult(result.credentials))
             dispatch(push("/"))
         } catch (err) {
+            console.log(err);
             if (err.data && err.data.status) {
                 setErrorMessage(err.data.message)
             } else {

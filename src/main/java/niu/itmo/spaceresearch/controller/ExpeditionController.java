@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author amifideles
@@ -18,19 +19,20 @@ import java.util.List;
 @SecurityRequirement(name = "basicAuth")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/expedition")
+@RequestMapping("/api/expeditions")
 public class ExpeditionController {
     private final ExpeditionService expeditionService;
 
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        return ResponseEntity.ok("string");
-    }
-
-    @PostMapping("")
+    @PostMapping()
     public ResponseEntity<?> createExpedition(ExpeditionRequestDto expeditionRequestDto) {
         expeditionService.createExpedition(expeditionRequestDto);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<SimpleExpeditionDto>> getResearcherExpeditions(Principal principal) {
+        List<SimpleExpeditionDto> expeditions = expeditionService.getResearcherExpeditions(principal);
+        return ResponseEntity.ok(expeditions);
     }
 
     @GetMapping("/{id}")
@@ -39,9 +41,9 @@ public class ExpeditionController {
         return ResponseEntity.ok(expedition);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<SimpleExpeditionDto>> getResearcherExpeditions(Principal principal) {
-        List<SimpleExpeditionDto> expeditions = expeditionService.getResearcherExpeditions(principal);
-        return ResponseEntity.ok(expeditions);
+    // TODO: remove
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("string");
     }
 }

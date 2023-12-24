@@ -3,11 +3,11 @@ import {selectToken} from "../redux/login/loginSelectors";
 import {createLogoutThunk} from "../redux/thunks/logoutThunk";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: "http://localhost:8080/api/point",
+    baseUrl: "http://localhost:8080/api",
     prepareHeaders: (headers, {getState}) => {
         const token = selectToken(getState())
         if (token) {
-            headers.set("authorization", `Bearer ${token}`)
+            headers.set("authorization", `Basic ${token}`)
         }
         return headers
     },
@@ -18,24 +18,34 @@ const baseQueryWithRedirect = async (args, api, extraOptions) => {
         if (result.error.status === 401) {
             api.dispatch(createLogoutThunk())
         }
-        console.log(result.error)
     }
     return result
 }
 
 export const resourceApi = createApi({
-    reducerPath: "api",
+    reducerPath: "api/resource",
     baseQuery: baseQueryWithRedirect,
     // tagTypes: ['points'],
     endpoints: (build) => ({
         getProfessions: build.query({
             query: () => ({
-                url: `professions`,
+                url: "/profession",
                 method: "GET"
-            }),
-            transformResponse: (response) => response.data
+            })
+        }),
+        getExpeditions: build.query({
+            query: () => ({
+                url: "/expeditions",
+                method: "GET"
+            })
+        }),
+        getExpedition: build.query({
+            query: (id) => ({
+                url: `/expeditions/${id}`,
+                method: "GET"
+            })
         }),
     })
 })
 
-export const {useGetProfessionsQuery} = resourceApi
+export const {useGetProfessionsQuery, useGetExpeditionsQuery, useGetExpeditionQuery} = resourceApi

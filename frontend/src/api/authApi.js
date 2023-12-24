@@ -10,7 +10,6 @@ export const authApi = createApi({
                 method: "POST",
                 body: credentials
             }),
-            transformResponse: (response) => response.data,
         }),
         login: build.mutation({
             query: (credentials) => ({
@@ -18,7 +17,6 @@ export const authApi = createApi({
                 method: "POST",
                 body: credentials
             }),
-            transformResponse: (response) => response.data,
         })
     })
 })
