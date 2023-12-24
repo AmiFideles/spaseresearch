@@ -21,14 +21,14 @@
     <p>Date of Construction: <span th:text="${spaceshipDto.dateOfConstruction}"></span></p>
     <p>Manufacturer: <span th:text="${spaceshipDto.manufacturer.name}"></span></p>
     <p>Max Speed: <span th:text="${spaceshipDto.maxSpeed} km/s"></span></p>
-    <p>Capacity: <span th:text="${spaceshipDto.capacity} m^3"></span></p>
+    <p>Capacity: <span th:text="${spaceshipDto.capacity}"></span></p>
 </div>
 
-<!-- Form for choosing researchers -->
+<!-- Form for choosing researchersId -->
 <form id="expeditionForm">
     <h2>Choose Researchers:</h2>
 
-    <!-- Display available researchers with checkboxes -->
+    <!-- Display available researchersId with checkboxes -->
     <div th:each="researcher, iterStat : ${availableResearchers}">
         <label>
             <input type="checkbox" name="selectedResearchers" value="${researcher.id}"

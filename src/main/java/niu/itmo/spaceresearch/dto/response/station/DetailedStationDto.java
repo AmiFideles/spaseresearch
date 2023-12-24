@@ -1,11 +1,12 @@
-package niu.itmo.spaceresearch.dto;
+package niu.itmo.spaceresearch.dto.response.station;
 
+import niu.itmo.spaceresearch.dto.PlanetDto;
 import org.springframework.lang.Nullable;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public record StationDto(
+public record DetailedStationDto(
         @Nullable
         Integer id,
         String name,

@@ -1,12 +1,15 @@
 package niu.itmo.spaceresearch.dto;
 
+import lombok.Builder;
+import niu.itmo.spaceresearch.dto.response.station.SimpleStationDto;
 import niu.itmo.spaceresearch.model.ExpeditionStatus;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record ExpeditionDto(
+@Builder
+public record ExpeditionResponseDto(
         @Nullable
         Integer id,
         ExpeditionStatus status,
@@ -15,8 +18,8 @@ public record ExpeditionDto(
         LocalDateTime endTime,
         @Nullable
         ReportDto report,
-        StationDto sourceStation,
-        StationDto destinationStation,
+        SimpleStationDto sourceStation,
+        SimpleStationDto destinationStation,
         List<ResearcherDto> participants,
         SpaceshipDto spaceship
 ) {

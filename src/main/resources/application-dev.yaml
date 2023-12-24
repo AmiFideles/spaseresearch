@@ -6,8 +6,16 @@ spring:
     username: itmo
     password: itmo
     driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
   thymeleaf:
     cache: false
+logging:
+  level:
+    org.springframework.security.web: DEBUG
+    org:
+      hibernate:
+        type: TRACE
+        SQL: DEBUG
+    org.springframework.data.jpa: DEBUG

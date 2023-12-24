@@ -1,10 +1,13 @@
 package niu.itmo.spaceresearch.dto;
 
+import lombok.Builder;
 import niu.itmo.spaceresearch.model.Gender;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
+import java.util.Set;
 
+@Builder
 public record ResearcherDto(
         @Nullable
         Integer id,
@@ -14,6 +17,6 @@ public record ResearcherDto(
         Gender gender,
         @Nullable
         Boolean isCapitan,
-        List<ProfessionDto> professions
+        Set<ProfessionDto> professions
 ) {
 }

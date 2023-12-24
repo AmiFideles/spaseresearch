@@ -1,12 +1,14 @@
 package niu.itmo.spaceresearch.dto;
 
-import niu.itmo.spaceresearch.model.Station;
+import lombok.Builder;
+import niu.itmo.spaceresearch.dto.response.station.DetailedStationDto;
 import org.springframework.lang.Nullable;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+@Builder
 public record SpaceshipDto(
         @Nullable
         Integer id,
@@ -19,6 +21,6 @@ public record SpaceshipDto(
         @Nullable
         Boolean inExpedition,
         @Nullable
-        StationDto currentStation
+        DetailedStationDto currentStation
 ) {
 }

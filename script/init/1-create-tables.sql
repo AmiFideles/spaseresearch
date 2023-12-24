@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS Expeditions
     commander_id           INT NOT NULL,
     source_station_id      INT NOT NULL,
     destination_station_id INT NOT NULL,                       -- Внешний ключ к таблице "Planets" для указания планеты назначения
-    status                 varchar(255) DEFAULT 'IN_PROGRESS', -- Статус экспедиции
+        status                 varchar(255) DEFAULT 'IN_PROGRESS', -- Статус экспедиции
     departure_time         TIMESTAMP    DEFAULT NOW(),         -- Время отправления
     end_time               TIMESTAMP    DEFAULT NULL,          -- Время завершения экспедиции
     FOREIGN KEY (spaceship_id) REFERENCES Spaceships (spaceship_id),

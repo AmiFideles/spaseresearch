@@ -2,7 +2,6 @@ package niu.itmo.spaceresearch.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +9,7 @@ import java.util.Set;
 /**
  * @author amifideles
  */
+@Builder
 @EqualsAndHashCode(exclude = {"expeditions", "professions"})
 @ToString(exclude = {"expeditions", "professions"})
 @Getter
@@ -22,7 +22,7 @@ public class Researcher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "researcher_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -53,7 +53,7 @@ public class Researcher {
             inverseJoinColumns = {@JoinColumn(name = "researcher_id")})
     private Set<Expedition> expeditions = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "researcherprofessions",
             joinColumns = {@JoinColumn(name = "researcher_id")},

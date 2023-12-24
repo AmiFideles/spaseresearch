@@ -8,13 +8,14 @@ import java.util.List;
 /**
  * @author amifideles
  */
-@EqualsAndHashCode(exclude = {"researchers", "cabins"})
-@ToString(exclude = {"researchers", "cabins"})
+@EqualsAndHashCode(exclude = {"researchersId", "cabins"})
+@ToString(exclude = {"researchersId", "cabins"})
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "professions")
 public class Profession {
     @Id

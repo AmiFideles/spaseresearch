@@ -1,10 +1,12 @@
 package niu.itmo.spaceresearch.dto;
 
+import lombok.Builder;
 import org.springframework.lang.Nullable;
 
+@Builder
 public record ProfessionDto(
         @Nullable
-        Integer id,
+        Long id,
         String name
 ) {
 }

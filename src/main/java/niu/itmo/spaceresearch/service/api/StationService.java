@@ -1,12 +1,12 @@
 package niu.itmo.spaceresearch.service.api;
 
-import niu.itmo.spaceresearch.dto.StationDto;
+import niu.itmo.spaceresearch.dto.response.station.DetailedStationDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface StationService {
-    List<StationDto> getAllStations();
+    List<DetailedStationDto> getAllStations();
 
-    Optional<StationDto> getStationById(Integer id);
+    Optional<DetailedStationDto> getStationById(Integer id);
 }

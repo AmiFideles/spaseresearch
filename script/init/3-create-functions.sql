@@ -55,15 +55,36 @@ $$ LANGUAGE plpgsql;
 
 
 
--- Функция для создания экспедиции
-CREATE OR REPLACE FUNCTION create_expedition(p_source_station_id INT, p_destination_station_id INT, p_spaceship_id INT,
-                                             p_commander_id INT)
-    RETURNS VOID AS
+-- -- Функция для создания экспедиции
+-- CREATE OR REPLACE FUNCTION create_expedition(p_source_station_id INT, p_destination_station_id INT, p_spaceship_id INT,
+--                                              p_commander_id INT)
+--     RETURNS VOID AS
+-- $$
+-- BEGIN
+--     -- Вставка новой записи в таблицу "Expeditions"
+--     INSERT INTO Expeditions (source_station_id, destination_station_id, spaceship_id, commander_id)
+--     VALUES (p_source_station_id, p_destination_station_id, p_spaceship_id, p_commander_id);
+-- END;
+-- $$ LANGUAGE plpgsql;
+   -- Функция для создания экспедиции
+CREATE OR REPLACE FUNCTION create_expedition(
+    p_source_station_id INT,
+    p_destination_station_id INT,
+    p_spaceship_id INT,
+    p_commander_id INT
+)
+RETURNS INT AS
 $$
+DECLARE
+v_expedition_id INT;
 BEGIN
-    -- Вставка новой записи в таблицу "Expeditions"
-    INSERT INTO Expeditions (source_station_id, destination_station_id, spaceship_id, commander_id)
-    VALUES (p_source_station_id, p_destination_station_id, p_spaceship_id, p_commander_id);
+    -- Вставка новой записи в таблицу "Expeditions" и возвращение значения в переменную
+INSERT INTO Expeditions (source_station_id, destination_station_id, spaceship_id, commander_id)
+VALUES (p_source_station_id, p_destination_station_id, p_spaceship_id, p_commander_id)
+    RETURNING expedition_id INTO v_expedition_id;
+
+-- Вернуть идентификатор созданной экспедиции
+RETURN v_expedition_id;
 END;
 $$ LANGUAGE plpgsql;
 
