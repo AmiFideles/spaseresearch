@@ -46,7 +46,11 @@ public class ExpeditionService {
 //        }
     }
 
-    public void createExpedition(ExpeditionRequestDto expeditionRequestDto) {
+    public void createExpedition(ExpeditionRequestDto expeditionRequestDto, Principal principal) {
+        Researcher changeCommander = researcherRepository.findByUsername(principal.getName())
+                .orElseThrow(() -> new ResearcherNotFound("Researcher not found with ID: %d".formatted(expeditionRequestDto.commanderId())));
+        Integer commanderId = changeCommander.getId();
+
         List<Researcher> researchers = researcherRepository.findAllById(expeditionRequestDto.researchersId());
         Researcher commander = researcherRepository.findById(expeditionRequestDto.commanderId())
                 .orElseThrow(() -> new ResearcherNotFound("Researcher not found with ID: %d".formatted(expeditionRequestDto.commanderId())));

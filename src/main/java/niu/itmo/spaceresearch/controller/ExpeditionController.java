@@ -23,8 +23,8 @@ public class ExpeditionController {
     private final ExpeditionService expeditionService;
 
     @PostMapping()
-    public ResponseEntity<?> createExpedition(ExpeditionRequestDto expeditionRequestDto) {
-        expeditionService.createExpedition(expeditionRequestDto);
+    public ResponseEntity<?> createExpedition(Principal principal, ExpeditionRequestDto expeditionRequestDto) {
+        expeditionService.createExpedition(expeditionRequestDto, principal);
         return ResponseEntity.noContent().build();
     }
 
