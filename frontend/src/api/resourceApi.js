@@ -25,11 +25,10 @@ const baseQueryWithRedirect = async (args, api, extraOptions) => {
 export const resourceApi = createApi({
     reducerPath: "api/resource",
     baseQuery: baseQueryWithRedirect,
-    // tagTypes: ['points'],
     endpoints: (build) => ({
         getProfessions: build.query({
             query: () => ({
-                url: "/profession",
+                url: "/professions",
                 method: "GET"
             })
         }),
@@ -45,7 +44,40 @@ export const resourceApi = createApi({
                 method: "GET"
             })
         }),
+        getStation: build.query({
+            query: (id) => ({
+                url: `/stations/${id}`,
+                method: "GET"
+            })
+        }),
+        getSpaceship: build.query({
+            query: (id) => ({
+                url: `/spaceships/${id}`,
+                method: "GET"
+            })
+        }),
+        getBreakdowns: build.query({
+            query: () => ({
+                url: `/breakdowns`,
+                method: "GET"
+            })
+        }),
+        createReport: build.mutation({
+            query: (data) => ({
+                url: "/reports",
+                method: "POST",
+                body: data
+            }),
+        })
     })
 })
 
-export const {useGetProfessionsQuery, useGetExpeditionsQuery, useGetExpeditionQuery} = resourceApi
+export const {
+    useGetProfessionsQuery,
+    useGetExpeditionsQuery,
+    useGetExpeditionQuery,
+    useGetStationQuery,
+    useGetSpaceshipQuery,
+    useGetBreakdownsQuery,
+    useCreateReportMutation,
+} = resourceApi

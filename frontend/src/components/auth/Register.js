@@ -1,4 +1,4 @@
-import Header from "../base/Header";
+import {Header} from "../base/Header";
 import {RegisterForm} from "./RegisterForm";
 import {Link} from "react-router-dom";
 

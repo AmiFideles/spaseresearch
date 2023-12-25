@@ -29,7 +29,7 @@ public class ReportService {
 
     public ReportDto getReportById(Integer id) {
         Report report = reportRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Report not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("ReportDescription not found with id: " + id));
 
         return ReportMapper.mapToDto(report);
     }

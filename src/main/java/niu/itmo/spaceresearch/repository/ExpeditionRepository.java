@@ -31,7 +31,12 @@ public interface ExpeditionRepository extends JpaRepository<Expedition, Integer>
             @Param("expeditionId") Integer expeditionId
     );
 
-    @Query("SELECT DISTINCT e FROM Expedition e JOIN e.researchers r WHERE r.id = :researcherId")
+    @Query(value = """
+        SELECT DISTINCT e.*
+        FROM expeditions e
+        JOIN expeditionresearchers r ON e.expedition_id = r.expedition_id
+        WHERE r.researcher_id = :researcherId
+    """, nativeQuery = true)
     List<Expedition> findExpeditionsByResearcherId(@Param("researcherId") Integer researcherId);
 }
 

@@ -112,12 +112,12 @@ VALUES
     (4, 4);
 
 -- Заполнение таблицы "Reports"
-INSERT INTO Reports (report_id, expedition_id, description)
+INSERT INTO Reports (expedition_id, description)
 VALUES
-    (1, 1, 'Initial report for expedition 1'),
-    (2, 2, 'Initial report for expedition 2'),
-    (3, 3, 'Initial report for expedition 3'),
-    (4, 4, 'Initial report for expedition 4');
+    (1, 'Initial report for expedition 1'),
+    (2, 'Initial report for expedition 2'),
+    (3, 'Initial report for expedition 3'),
+    (4, 'Initial report for expedition 4');
 
 -- Заполнение таблицы "BreakdownTypes"
 INSERT INTO BreakdownTypes (breakdown_type_id, name)

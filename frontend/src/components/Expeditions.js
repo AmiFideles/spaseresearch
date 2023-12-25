@@ -1,12 +1,11 @@
-import Header from "./base/Header";
+import {Link} from "react-router-dom";
 import {Button, Placeholder, Table} from "react-bootstrap";
 import {useGetExpeditionsQuery} from "../api/resourceApi";
 import {LoadError} from "./util/LoadError";
-import {Link} from "react-router-dom";
+import {Header} from "./base/Header";
 
 export function Expeditions() {
     const {data, isLoading, isError} = useGetExpeditionsQuery()
-
     return (
         <div className="vh-100">
             <Header/>

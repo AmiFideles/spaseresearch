@@ -1,7 +1,7 @@
 import {Form, Navbar} from "react-bootstrap";
 import AuthButton from "./AuthButton";
 
-function Header() {
+export function Header() {
     return (
         <Navbar bg="light" variant="light" className="d-flex flex-row justify-content-center flex-wrap">
             <Navbar.Brand className="m-1" href="/">Space Researchers</Navbar.Brand>
@@ -12,5 +12,3 @@ function Header() {
         </Navbar>
     )
 }
-
-export default Header
