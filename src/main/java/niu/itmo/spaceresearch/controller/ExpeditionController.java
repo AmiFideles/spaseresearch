@@ -5,13 +5,12 @@ import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.request.ExpeditionRequestDto;
 import niu.itmo.spaceresearch.dto.response.expedition.DetailedExpeditionDto;
 import niu.itmo.spaceresearch.dto.response.expedition.SimpleExpeditionDto;
-import niu.itmo.spaceresearch.service.impl.ExpeditionService;
+import niu.itmo.spaceresearch.service.ExpeditionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author amifideles

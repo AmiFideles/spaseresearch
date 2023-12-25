@@ -2,7 +2,7 @@ package niu.itmo.spaceresearch.controller;
 
 import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.ProfessionDto;
-import niu.itmo.spaceresearch.service.impl.ProfessionService;
+import niu.itmo.spaceresearch.service.ProfessionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author amifideles
  */
-@RequestMapping("/api/profession")
+@RequestMapping("/api/professions")
 @RequiredArgsConstructor
 @RestController
 public class ProfessionController {

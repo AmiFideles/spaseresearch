@@ -4,7 +4,7 @@ import lombok.Builder;
 import org.springframework.lang.Nullable;
 
 @Builder
-public record BreakdownDto(
+public record BreakdownTypeDto(
         @Nullable
         Integer id,
         String name

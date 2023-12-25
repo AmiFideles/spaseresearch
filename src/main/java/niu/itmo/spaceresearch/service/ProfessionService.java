@@ -1,4 +1,4 @@
-package niu.itmo.spaceresearch.service.impl;
+package niu.itmo.spaceresearch.service;
 
 import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.ProfessionDto;

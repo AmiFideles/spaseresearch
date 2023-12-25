@@ -1,4 +1,4 @@
-package niu.itmo.spaceresearch.service.impl;
+package niu.itmo.spaceresearch.service;
 
 import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.ResearcherDto;
@@ -35,7 +35,8 @@ public class ResearcherServiceImpl implements ResearcherService {
 
     @Override
     public List<ResearcherDto> getAvailableResearchers() {
-        return null;
+        List<Researcher> freeResearchers = researcherRepository.findFreeResearchers();
+        return ResearcherMapper.toListResearcherDto(freeResearchers);
     }
 
     @Override

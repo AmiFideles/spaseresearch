@@ -1,6 +1,6 @@
 package niu.itmo.spaceresearch.mapper;
 
-import niu.itmo.spaceresearch.dto.BreakdownDto;
+import niu.itmo.spaceresearch.dto.BreakdownTypeDto;
 import niu.itmo.spaceresearch.dto.ReportDto;
 import niu.itmo.spaceresearch.model.BreakdownType;
 import niu.itmo.spaceresearch.model.Report;
@@ -20,7 +20,7 @@ public class ReportMapper {
                 .build();
     }
 
-    private static List<BreakdownDto> mapBreakdownsToDto(Set<BreakdownType> breakdownTypes) {
+    private static List<BreakdownTypeDto> mapBreakdownsToDto(Set<BreakdownType> breakdownTypes) {
         return breakdownTypes.stream()
                 .map(BreakdownMapper::mapToDto)
                 .collect(Collectors.toList());

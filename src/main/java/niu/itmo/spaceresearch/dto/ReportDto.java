@@ -9,6 +9,6 @@ import org.springframework.lang.Nullable;
 public record ReportDto(
         @Nullable
         Integer id,
-        List<BreakdownDto> breakdowns
+        List<BreakdownTypeDto> breakdowns
 ) {
 }
