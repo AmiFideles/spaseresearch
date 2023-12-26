@@ -7,7 +7,6 @@ import niu.itmo.spaceresearch.dto.response.expedition.DetailedExpeditionDto;
 import niu.itmo.spaceresearch.dto.response.expedition.SimpleExpeditionDto;
 import niu.itmo.spaceresearch.service.ExpeditionService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -44,7 +43,7 @@ public class ExpeditionController {
     @PostMapping("/{expeditionId}")
     public ResponseEntity<String> completeExpedition(@PathVariable int expeditionId) {
         expeditionService.completeExpedition(expeditionId);
-        return ResponseEntity.ok("Expedition marked as completed");
+        return ResponseEntity.noContent().build();
     }
 
     // TODO: remove
