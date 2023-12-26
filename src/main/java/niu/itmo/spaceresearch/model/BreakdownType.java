@@ -23,6 +23,10 @@ public class BreakdownType {
     private Integer id;
     @Column(name = "name", nullable = false)
     private String name;
-    @ManyToMany(mappedBy = "breakdownTypes")
+    @ManyToMany(mappedBy = "breakdownTypes", fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST})
     private List<Report> reports;
 }

@@ -32,10 +32,10 @@ public class Cabins {
     @JoinColumn(name = "spaceship_id")
     private Spaceship spaceship;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "professionscabinassignment",
-            joinColumns = {@JoinColumn(name = "profession_id")},
-            inverseJoinColumns = {@JoinColumn(name = "cabin_id")})
+    @ManyToMany(mappedBy = "cabins", fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST})
     private Set<Profession> professions = new HashSet<>();
 }

@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * @author amifideles
  */
-@EqualsAndHashCode(exclude = {"researchersId", "cabins"})
-@ToString(exclude = {"researchersId", "cabins"})
+@EqualsAndHashCode(exclude = {"researchers", "cabins"})
+@ToString(exclude = {"researchers", "cabins"})
 @Setter
 @Getter
 @NoArgsConstructor
@@ -26,9 +26,22 @@ public class Profession {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "professions")
+    @ManyToMany(mappedBy = "professions", fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST
+    })
     private List<Researcher> researchers;
 
-    @ManyToMany(mappedBy = "professions")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST})
+    @JoinTable(
+            name = "professionscabinassignment",
+            joinColumns = {@JoinColumn(name = "profession_id")},
+            inverseJoinColumns = {@JoinColumn(name = "cabin_id")})
     private List<Cabins> cabins;
 }

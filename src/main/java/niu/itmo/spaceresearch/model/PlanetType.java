@@ -25,6 +25,10 @@ public class PlanetType {
     private String name;
     @OneToMany(mappedBy = "planetType")
     private List<Planet> planetType;
-    @ManyToMany(mappedBy = "planetTypes")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "planetTypes", cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST})
     private List<Spaceship> spaceships;
 }

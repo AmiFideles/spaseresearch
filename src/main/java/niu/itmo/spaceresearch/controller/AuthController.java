@@ -27,8 +27,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody AuthRequest authRequest) {
-        String credentials = researcherService.login(authRequest);
-        return ResponseEntity.ok(new LoginResponseDto(credentials));
+        LoginResponseDto loginResponseDto = researcherService.login(authRequest);
+        return ResponseEntity.ok(loginResponseDto);
     }
 
     @GetMapping("test")

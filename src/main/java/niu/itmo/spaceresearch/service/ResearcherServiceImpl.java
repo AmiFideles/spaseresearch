@@ -4,22 +4,21 @@ import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.ResearcherDto;
 import niu.itmo.spaceresearch.dto.request.AuthRequest;
 import niu.itmo.spaceresearch.dto.request.ResearcherRequestDto;
+import niu.itmo.spaceresearch.dto.response.LoginResponseDto;
 import niu.itmo.spaceresearch.mapper.ResearcherMapper;
 import niu.itmo.spaceresearch.model.Profession;
 import niu.itmo.spaceresearch.model.Researcher;
 import niu.itmo.spaceresearch.repository.ProfessionRepository;
 import niu.itmo.spaceresearch.repository.ResearcherRepository;
 import niu.itmo.spaceresearch.service.api.ResearcherService;
+import niu.itmo.spaceresearch.service.exceptions.ResearcherNotFound;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author amifideles
@@ -54,13 +53,23 @@ public class ResearcherServiceImpl implements ResearcherService {
     }
 
     @Override
-    public String login(AuthRequest authRequest) {
+    public LoginResponseDto login(AuthRequest authRequest) {
         // аутентификации
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authRequest.username(), authRequest.password())
         );
         String credentials = authRequest.username() + ":" + authRequest.password();
         String base64Credentials = Base64.getEncoder().encodeToString(credentials.getBytes());
-        return base64Credentials;
+        Researcher researcher = researcherRepository.findByUsername(authRequest.username())
+                .orElseThrow(() -> new ResearcherNotFound(
+                        "Researcher not found with username: %s"
+                                .formatted(authRequest.username())));
+        Set<Profession> professions = researcher.getProfessions();
+        boolean hasCommanderProfession = professions.stream()
+                .anyMatch(profession -> profession.getName().equals("Commander"));
+        return LoginResponseDto.builder()
+                .credentials(base64Credentials)
+                .isCapitan(hasCommanderProfession)
+                .build();
     }
 }

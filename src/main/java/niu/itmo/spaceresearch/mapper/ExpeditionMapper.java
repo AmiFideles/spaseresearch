@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  */
 public class ExpeditionMapper {
     // TODO засетить значение isCapitan?
-    public static DetailedExpeditionDto toDetailedExpeditionDto(Expedition expedition) {
+    public static DetailedExpeditionDto toDetailedExpeditionDto(Expedition expedition, Boolean isCaptain) {
         return DetailedExpeditionDto.builder()
                 .id(expedition.getId())
                 .status(expedition.getExpeditionStatus())
@@ -25,6 +25,7 @@ public class ExpeditionMapper {
                 .destinationStation(StationMapper.mapToSimpleDto(expedition.getDestinationStation()))
                 .participants(mapResearchersToDto(expedition.getResearchers()))
                 .spaceship(SpaceshipMapper.toSimpleSpaceshipDto(expedition.getSpaceship()))
+                .isCapitan(isCaptain)
                 .build();
     }
 

@@ -28,7 +28,11 @@ public class Report {
     @JoinColumn(name = "expedition_id", unique = true, nullable = false)
     private Expedition expedition;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST})
     @JoinTable(
             name = "reportsbreakdowns",
             joinColumns = {@JoinColumn(name = "report_id")},

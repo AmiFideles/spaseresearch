@@ -46,14 +46,14 @@ public class Researcher {
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
-    @ManyToMany
-    @JoinTable(
-            name = "expeditionresearchers",
-            joinColumns = {@JoinColumn(name = "expedition_id")},
-            inverseJoinColumns = {@JoinColumn(name = "researcher_id")})
+    @ManyToMany(mappedBy = "researchers", cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST})
     private Set<Expedition> expeditions = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "researcherprofessions",
             joinColumns = {@JoinColumn(name = "researcher_id")},

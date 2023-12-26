@@ -6,8 +6,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author amifideles
@@ -15,8 +17,9 @@ import java.util.List;
 @Repository
 public interface ExpeditionRepository extends JpaRepository<Expedition, Integer> {
 
-    @Modifying
-    @Query(value = "SELECT create_expedition(:sourceStationId, :destinationStationId, :spaceshipId, :commanderId)", nativeQuery = true)
+//    @Modifying
+    @Transactional
+    @Query(value = "SELECT * FROM create_expedition(:sourceStationId, :destinationStationId, :spaceshipId, :commanderId)", nativeQuery = true)
     Integer createExpedition(
             @Param("sourceStationId") Integer sourceStationId,
             @Param("destinationStationId") Integer destinationStationId,
@@ -31,6 +34,10 @@ public interface ExpeditionRepository extends JpaRepository<Expedition, Integer>
             @Param("expeditionId") Integer expeditionId
     );
 
+    @Transactional
+    @Query(value = "SELECT * FROM set_expedition_completed(:expeditionId)", nativeQuery = true)
+    void setExpeditionCompleted(@Param("expeditionId") int expeditionId);
+
     @Query(value = """
         SELECT DISTINCT e.*
         FROM expeditions e
@@ -38,5 +45,8 @@ public interface ExpeditionRepository extends JpaRepository<Expedition, Integer>
         WHERE r.researcher_id = :researcherId
     """, nativeQuery = true)
     List<Expedition> findExpeditionsByResearcherId(@Param("researcherId") Integer researcherId);
+
+    @Query(value = "SELECT * FROM expeditions e WHERE e.expedition_id = :expeditionId", nativeQuery = true)
+    Optional<Expedition> findExpeditionById(@Param("expeditionId") Integer expeditionId);
 }
 

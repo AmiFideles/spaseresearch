@@ -36,8 +36,14 @@ public class ExpeditionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DetailedExpeditionDto> getExpeditionById(@PathVariable Integer id, Principal principal) {
-        DetailedExpeditionDto expedition = expeditionService.getExpeditionById(id);
+        DetailedExpeditionDto expedition = expeditionService.getExpeditionById(id, principal);
         return ResponseEntity.ok(expedition);
+    }
+
+    @PostMapping("/{expeditionId}")
+    public ResponseEntity<String> completeExpedition(@PathVariable int expeditionId) {
+        expeditionService.completeExpedition(expeditionId);
+        return ResponseEntity.ok("Expedition marked as completed");
     }
 
     // TODO: remove
@@ -45,4 +51,6 @@ public class ExpeditionController {
     public ResponseEntity<String> test() {
         return ResponseEntity.ok("string");
     }
+
+
 }

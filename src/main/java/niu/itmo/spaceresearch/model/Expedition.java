@@ -10,8 +10,8 @@ import java.util.List;
  * @author amifideles
  */
 
-@EqualsAndHashCode(exclude = {"spaceship", "commander", "sourceStation", "destinationStation", "researchersId"})
-@ToString(exclude = {"spaceship", "commander", "sourceStation", "destinationStation", "researchersId"})
+@EqualsAndHashCode(exclude = {"spaceship", "commander", "sourceStation", "destinationStation", "researchers"})
+@ToString(exclude = {"spaceship", "commander", "sourceStation", "destinationStation", "researchers"})
 @Builder
 @Getter
 @Setter
@@ -50,7 +50,15 @@ public class Expedition {
     @JoinColumn(name = "destination_station_id", nullable = false)
     private Station destinationStation;
 
-    @ManyToMany(mappedBy = "expeditions")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST})
+    @JoinTable(
+            name = "expeditionresearchers",
+            joinColumns = {@JoinColumn(name = "expedition_id")},
+            inverseJoinColumns = {@JoinColumn(name = "researcher_id")})
     private List<Researcher> researchers;
 
     @OneToOne(mappedBy = "expedition")

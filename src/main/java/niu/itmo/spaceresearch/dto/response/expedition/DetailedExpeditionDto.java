@@ -25,6 +25,6 @@ public record DetailedExpeditionDto(
         SimpleStationDto destinationStation,
         List<ResearcherDto> participants,
         SimpleSpaceshipDto spaceship,
-        Boolean isCommander
+        Boolean isCapitan
 ) {
 }
