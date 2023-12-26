@@ -10,7 +10,6 @@ import niu.itmo.spaceresearch.model.Profession;
 import niu.itmo.spaceresearch.model.Researcher;
 import niu.itmo.spaceresearch.repository.ProfessionRepository;
 import niu.itmo.spaceresearch.repository.ResearcherRepository;
-import niu.itmo.spaceresearch.service.api.ResearcherService;
 import niu.itmo.spaceresearch.service.exceptions.ResearcherNotFound;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,24 +25,21 @@ import java.util.*;
 @Primary
 @Service
 @RequiredArgsConstructor
-public class ResearcherServiceImpl implements ResearcherService {
+public class ResearcherService {
     private final PasswordEncoder passwordEncoder;
     private final ResearcherRepository researcherRepository;
     private final ProfessionRepository professionRepository;
     private final AuthenticationManager authenticationManager;
 
-    @Override
     public List<ResearcherDto> getAvailableResearchers() {
         List<Researcher> freeResearchers = researcherRepository.findFreeResearchers();
         return ResearcherMapper.toListResearcherDto(freeResearchers);
     }
 
-    @Override
     public Optional<ResearcherDto> findByUsername(String username) {
         return Optional.empty();
     }
 
-    @Override
     public void createResearcher(ResearcherRequestDto requestDto) {
         Researcher researcher = ResearcherMapper.toEntity(requestDto);
         researcher.setPassword(passwordEncoder.encode(researcher.getPassword()));
@@ -52,7 +48,6 @@ public class ResearcherServiceImpl implements ResearcherService {
         researcherRepository.save(researcher);
     }
 
-    @Override
     public LoginResponseDto login(AuthRequest authRequest) {
         // аутентификации
         authenticationManager.authenticate(

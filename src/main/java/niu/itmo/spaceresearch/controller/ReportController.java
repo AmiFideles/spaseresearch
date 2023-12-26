@@ -6,6 +6,7 @@ import niu.itmo.spaceresearch.dto.ReportDto;
 import niu.itmo.spaceresearch.dto.ReportRequestDto;
 import niu.itmo.spaceresearch.service.ReportService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -24,6 +25,7 @@ public class ReportController {
         return ResponseEntity.ok(reportDto);
     }
 
+    @PreAuthorize("hasAuthority('Captain')")
     @PostMapping("")
     public ResponseEntity<?> createReport(@RequestBody ReportRequestDto reportDto) {
         reportService.createReport(reportDto);

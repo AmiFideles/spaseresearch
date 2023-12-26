@@ -3,7 +3,7 @@ package niu.itmo.spaceresearch.controller;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.ResearcherDto;
-import niu.itmo.spaceresearch.service.api.ResearcherService;
+import niu.itmo.spaceresearch.service.ResearcherService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -34,12 +34,15 @@ public class ExpeditionService {
     private final SpaceshipRepository spaceshipRepository;
 
     @Transactional
-    public void createExpeditionUsingFunction(ExpeditionRequestDto expeditionRequestDto) {
+    public void createExpeditionUsingFunction(ExpeditionRequestDto expeditionRequestDto, Principal principal) {
+        Researcher commander = researcherRepository.findByUsername(principal.getName())
+                .orElseThrow(() -> new ResearcherNotFound("Researcher not found username: %s".formatted(principal.getName())));
+
         Integer expeditionId = expeditionRepository.createExpedition(
                 expeditionRequestDto.sourceStationId(),
                 expeditionRequestDto.destinationStationId(),
                 expeditionRequestDto.spaceshipId(),
-                expeditionRequestDto.commanderId()
+                commander.getId()
         );
 //        // TODO выкинуть ошибку ?
 //        for (Integer researcherId : expeditionRequestDto.researchersId()) {
@@ -49,14 +52,11 @@ public class ExpeditionService {
 
     @Transactional
     public void createExpedition(ExpeditionRequestDto expeditionRequestDto, Principal principal) {
-        Researcher changeCommander = researcherRepository.findByUsername(principal.getName())
-                .orElseThrow(() -> new ResearcherNotFound("Researcher not found with ID: %d".formatted(expeditionRequestDto.commanderId())));
-        Integer commanderId = changeCommander.getId();
+        Researcher commander = researcherRepository.findByUsername(principal.getName())
+                .orElseThrow(() -> new ResearcherNotFound("Researcher not found username: %s".formatted(principal.getName())));
 
 
         List<Researcher> researchers = researcherRepository.findAllById(expeditionRequestDto.researchersId());
-        Researcher commander = researcherRepository.findById(expeditionRequestDto.commanderId())
-                .orElseThrow(() -> new ResearcherNotFound("Researcher not found with ID: %d".formatted(expeditionRequestDto.commanderId())));
         Station sourceStation = stationRepository.findById(expeditionRequestDto.sourceStationId())
                 .orElseThrow(() -> new StationNotFound("Station not found with ID: " + expeditionRequestDto.sourceStationId()));
         Station destinationStation = stationRepository.findById(expeditionRequestDto.destinationStationId())

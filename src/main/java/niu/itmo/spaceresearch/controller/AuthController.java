@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import niu.itmo.spaceresearch.dto.request.AuthRequest;
 import niu.itmo.spaceresearch.dto.request.ResearcherRequestDto;
 import niu.itmo.spaceresearch.dto.response.LoginResponseDto;
-import niu.itmo.spaceresearch.service.api.ResearcherService;
+import niu.itmo.spaceresearch.service.ResearcherService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
