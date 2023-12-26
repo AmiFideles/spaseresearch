@@ -1,8 +1,12 @@
 import {Link, useParams} from "react-router-dom";
-import {useGetExpeditionQuery} from "../api/resourceApi";
+import {useFinishExpeditionMutation, useGetExpeditionQuery} from "../api/resourceApi";
 import {LoadError} from "./util/LoadError";
 import {Button, Placeholder} from "react-bootstrap";
 import {Header} from "./base/Header";
+import {StatusButton} from "./util/StatusButton";
+import {useDispatch} from "react-redux";
+import {push} from "@lagunovsky/redux-react-router";
+import {ResearcherDescription} from "./sub/ResearcherDescription";
 
 /*
 Описание Экспедиции:
@@ -18,7 +22,6 @@ import {Header} from "./base/Header";
 Если COMPLETED
 - дата конца
 
-TODO:
 !!!Если командир:
 Если IN PROGRESS:
     - добавить кнопку для перехода на экран создания отчета
@@ -28,6 +31,20 @@ TODO:
 export function Expedition() {
     const {id} = useParams();
     const {data, isLoading, isError} = useGetExpeditionQuery(id);
+    const isCapitan = data && data.isCapitan;
+    const showCreateReport = data && isCapitan && data.status === "IN_PROGRESS";
+    const showFinish = data && isCapitan && data.status === "LANDED";
+    const [finishMission, {isLoading: sendIsLoading, isError: sendIsError}] = useFinishExpeditionMutation()
+    const dispatch = useDispatch()
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            await finishMission(id).unwrap()
+            dispatch(push(`/expeditions`))
+        } catch (err) {
+            console.log(err);
+        }
+    }
     console.log(data);
     return (
         <div>
@@ -36,13 +53,34 @@ export function Expedition() {
                 <div className="h3 text-center">
                     Expedition
                 </div>
-                {isError ? <LoadError/> : isLoading ? <Placeholder xs={6}/> : ExpeditionDescription(data)}
+                {isError ? <LoadError/> : isLoading ? <Placeholder xs={6}/> :
+                    <div>
+                        <ExpeditionDescription data={data}/>
+                        {showCreateReport ?
+                            <Button variant="success" as={Link} to={`/reports/create/${id}`}>
+                                Create landing report
+                            </Button> : ""
+                        }
+                        {showFinish ?
+                            <StatusButton
+                                onClick={handleSubmit}
+                                isLoading={sendIsLoading}
+                                isError={sendIsError}
+                                className="w-100"
+                                variant="success"
+                                type="button"
+                            >
+                                Finish mission
+                            </StatusButton> : ""
+                        }
+                    </div>
+                }
             </div>
         </div>
     )
 }
 
-function ExpeditionDescription(data) {
+function ExpeditionDescription({data}) {
     return (
         <div>
             <h4>{`Expedition #${data.id}`}</h4>
@@ -61,26 +99,11 @@ function ExpeditionDescription(data) {
                 {`Spaceship: ${data.spaceship.name}`}
                 <Button variant="success" as={Link} to={`/spaceships/${data.spaceship.id}`}>></Button>
             </div>
-            <ReportDescription data={data.report} />
+            <ReportDescription data={data.report}/>
             <div>
                 Participants
-                {data.participants.map(el => <ResearcherDescription key={el.id} data={el} />)}
+                {data.participants.map(el => <ResearcherDescription key={el.id} data={el}/>)}
             </div>
-        </div>
-    )
-}
-
-function ResearcherDescription({data}) {
-    return (
-        <div>
-            <h5>Researcher #{data.id}</h5>
-            <div>First name: {data.firstName}</div>
-            <div>Last name: {data.lastName}</div>
-            <div>Gender: {data.gender}</div>
-            <div>Age: {data.age}</div>
-            {data.isCapitan ? <div>Capitan</div> : ""}
-            <h6>Professions</h6>
-            {data.professions.map(el => <div key={el.id}>{el.name}</div>)}
         </div>
     )
 }

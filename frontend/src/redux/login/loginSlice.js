@@ -1,7 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    token: localStorage.getItem("token")
+    token: localStorage.getItem("token"),
+    isCapitan: localStorage.getItem("isCapitan")
 }
 
 export const loginSlice = createSlice({
@@ -9,8 +10,17 @@ export const loginSlice = createSlice({
     initialState,
     reducers: {
         loginResult: (state, action) => {
-            state.token = action.payload
-            localStorage.setItem("token", action.payload)
+            if (!action.payload) {
+                state.token = null;
+                state.isCapitan = null;
+                localStorage.setItem("token", null);
+                localStorage.setItem("isCapitan", null);
+            } else {
+                state.token = action.payload.credentials;
+                state.isCapitan = action.payload.isCapitan;
+                localStorage.setItem("token", action.payload.credentials);
+                localStorage.setItem("isCapitan", action.payload.isCapitan);
+            }
         }
     }
 })

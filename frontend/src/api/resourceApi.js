@@ -68,7 +68,39 @@ export const resourceApi = createApi({
                 method: "POST",
                 body: data
             }),
-        })
+        }),
+        finishExpedition: build.mutation({
+            query: (id) => ({
+                url: `/expeditions/${id}`,
+                method: "POST",
+                body: {}
+            }),
+        }),
+        createExpedition: build.mutation({
+            query: (data) => ({
+                url: `/expeditions`,
+                method: "POST",
+                body: data
+            }),
+        }),
+        getStations: build.query({
+            query: () => ({
+                url: `/stations`,
+                method: "GET"
+            })
+        }),
+        getSuitableSpaceship: build.query({
+            query: ({sourceStationId, destinationStationId}) => ({
+                url: `/spaceships?sourceStationId=${sourceStationId}&destinationStationId=${destinationStationId}`,
+                method: "GET"
+            })
+        }),
+        getFreeResearchers: build.query({
+            query: () => ({
+                url: `/researchers/free`,
+                method: "GET"
+            })
+        }),
     })
 })
 
@@ -80,4 +112,9 @@ export const {
     useGetSpaceshipQuery,
     useGetBreakdownsQuery,
     useCreateReportMutation,
+    useFinishExpeditionMutation,
+    useCreateExpeditionMutation,
+    useGetStationsQuery,
+    useGetSuitableSpaceshipQuery,
+    useGetFreeResearchersQuery,
 } = resourceApi
