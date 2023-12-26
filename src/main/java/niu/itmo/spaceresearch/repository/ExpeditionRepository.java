@@ -17,7 +17,6 @@ import java.util.Optional;
 @Repository
 public interface ExpeditionRepository extends JpaRepository<Expedition, Integer> {
 
-//    @Modifying
     @Transactional
     @Query(value = "SELECT * FROM create_expedition(:sourceStationId, :destinationStationId, :spaceshipId, :commanderId)", nativeQuery = true)
     Integer createExpedition(
@@ -27,8 +26,8 @@ public interface ExpeditionRepository extends JpaRepository<Expedition, Integer>
             @Param("commanderId") Integer commanderId
     );
 
-    //    @Modifying
-    @Query(value = "SELECT add_researcher_to_expedition(:researcherId, :expeditionId)", nativeQuery = true)
+    @Transactional
+    @Query(value = "SELECT * FROM add_researcher_to_expedition(:researcherId, :expeditionId)", nativeQuery = true)
     void addResearcherToExpedition(
             @Param("researcherId") Integer researcherId,
             @Param("expeditionId") Integer expeditionId
@@ -38,14 +37,16 @@ public interface ExpeditionRepository extends JpaRepository<Expedition, Integer>
     @Query(value = "SELECT * FROM set_expedition_completed(:expeditionId)", nativeQuery = true)
     void setExpeditionCompleted(@Param("expeditionId") int expeditionId);
 
+    @Transactional
     @Query(value = """
-        SELECT DISTINCT e.*
-        FROM expeditions e
-        JOIN expeditionresearchers r ON e.expedition_id = r.expedition_id
-        WHERE r.researcher_id = :researcherId
-    """, nativeQuery = true)
+                SELECT DISTINCT e.*
+                FROM expeditions e
+                JOIN expeditionresearchers r ON e.expedition_id = r.expedition_id
+                WHERE r.researcher_id = :researcherId
+            """, nativeQuery = true)
     List<Expedition> findExpeditionsByResearcherId(@Param("researcherId") Integer researcherId);
 
+    @Transactional
     @Query(value = "SELECT * FROM expeditions e WHERE e.expedition_id = :expeditionId", nativeQuery = true)
     Optional<Expedition> findExpeditionById(@Param("expeditionId") Integer expeditionId);
 }

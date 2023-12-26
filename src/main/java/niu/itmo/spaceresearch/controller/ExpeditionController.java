@@ -24,7 +24,7 @@ public class ExpeditionController {
 
     @PostMapping()
     public ResponseEntity<?> createExpedition(Principal principal, ExpeditionRequestDto expeditionRequestDto) {
-        expeditionService.createExpedition(expeditionRequestDto, principal);
+        expeditionService.createExpeditionUsingFunction(expeditionRequestDto, principal);
         return ResponseEntity.noContent().build();
     }
 
@@ -41,7 +41,7 @@ public class ExpeditionController {
     }
 
     @PostMapping("/{expeditionId}")
-    public ResponseEntity<String> completeExpedition(@PathVariable int expeditionId) {
+    public ResponseEntity<?> completeExpedition(@PathVariable int expeditionId) {
         expeditionService.completeExpedition(expeditionId);
         return ResponseEntity.noContent().build();
     }

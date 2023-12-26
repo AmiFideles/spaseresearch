@@ -44,10 +44,10 @@ public class ExpeditionService {
                 expeditionRequestDto.spaceshipId(),
                 commander.getId()
         );
-//        // TODO выкинуть ошибку ?
-//        for (Integer researcherId : expeditionRequestDto.researchersId()) {
-//            expeditionRepository.addResearcherToExpedition(researcherId, expeditionId);
-//        }
+        // TODO выкинуть ошибку ?
+        for (Integer researcherId : expeditionRequestDto.researchersId()) {
+            expeditionRepository.addResearcherToExpedition(researcherId, expeditionId);
+        }
     }
 
     @Transactional

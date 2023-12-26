@@ -20,7 +20,7 @@ public class ExpeditionMapper {
                 .status(expedition.getExpeditionStatus())
                 .departureTime(expedition.getDepartureTime())
                 .endTime(expedition.getEndTime())
-                .report(ReportMapper.mapToDto(expedition.getReport()))
+                .report(expedition.getReport()==null?null:ReportMapper.mapToDto(expedition.getReport()))
                 .sourceStation(StationMapper.mapToSimpleDto(expedition.getSourceStation()))
                 .destinationStation(StationMapper.mapToSimpleDto(expedition.getDestinationStation()))
                 .participants(mapResearchersToDto(expedition.getResearchers()))
