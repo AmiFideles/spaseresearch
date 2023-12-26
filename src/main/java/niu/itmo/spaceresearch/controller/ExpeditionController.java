@@ -24,7 +24,6 @@ public class ExpeditionController {
     private final ExpeditionService expeditionService;
 
     @PostMapping()
-    @PreAuthorize("hasAuthority('Captain')")
     public ResponseEntity<?> createExpedition(Principal principal, ExpeditionRequestDto expeditionRequestDto) {
         expeditionService.createExpedition(expeditionRequestDto, principal);
         return ResponseEntity.noContent().build();
@@ -42,7 +41,6 @@ public class ExpeditionController {
         return ResponseEntity.ok(expedition);
     }
 
-    @PreAuthorize("hasAuthority('Captain')")
     @PostMapping("/{expeditionId}")
     public ResponseEntity<String> completeExpedition(@PathVariable int expeditionId) {
         expeditionService.completeExpedition(expeditionId);

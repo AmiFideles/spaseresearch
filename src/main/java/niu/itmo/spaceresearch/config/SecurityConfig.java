@@ -23,7 +23,6 @@ import org.springframework.security.web.SecurityFilterChain;
 /**
  * @author amifideles
  */
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @SecurityScheme(name = "basicAuth", scheme = "basic", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
 @RequiredArgsConstructor
 @Configuration

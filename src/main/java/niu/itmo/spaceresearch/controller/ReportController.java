@@ -25,7 +25,6 @@ public class ReportController {
         return ResponseEntity.ok(reportDto);
     }
 
-    @PreAuthorize("hasAuthority('Captain')")
     @PostMapping("")
     public ResponseEntity<?> createReport(@RequestBody ReportRequestDto reportDto) {
         reportService.createReport(reportDto);
