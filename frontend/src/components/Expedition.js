@@ -7,6 +7,7 @@ import {StatusButton} from "./util/StatusButton";
 import {useDispatch} from "react-redux";
 import {push} from "@lagunovsky/redux-react-router";
 import {ResearcherDescription} from "./sub/ResearcherDescription";
+import {prettyTime} from "./util/pretty";
 
 /*
 Описание Экспедиции:
@@ -84,8 +85,8 @@ function ExpeditionDescription({data}) {
         <div>
             <h4>{`Expedition #${data.id}`}</h4>
             <div>{`Status: ${data.status}`}</div>
-            <div>{`Departure time: ${data.departureTime}`}</div>
-            {data.endTime ? <div>{`End time: ${data.endTime}`}</div> : ""}
+            <div>{`Departure time: ${prettyTime(data.departureTime)}`}</div>
+            {data.endTime ? <div>{`End time: ${prettyTime(data.endTime)}`}</div> : ""}
             <div>
                 {`Source station: ${data.sourceStation.name}`}
                 <Button variant="success" as={Link} to={`/stations/${data.sourceStation.id}`}>></Button>

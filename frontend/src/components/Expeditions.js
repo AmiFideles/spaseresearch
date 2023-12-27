@@ -3,6 +3,7 @@ import {Button, Placeholder, Table} from "react-bootstrap";
 import {useGetExpeditionsQuery} from "../api/resourceApi";
 import {LoadError} from "./util/LoadError";
 import {Header} from "./base/Header";
+import {prettyTime} from "./util/pretty";
 
 export function Expeditions() {
     const {data, isLoading, isError} = useGetExpeditionsQuery()
@@ -31,8 +32,8 @@ export function Expeditions() {
                                     <tr key={el.id}>
                                         <td>Expedition #{el.id}</td>
                                         <td>{el.status}</td>
-                                        <td>{el.departureTime}</td>
-                                        <td>{el.endTime ? el.endTime : "Not yet"}</td>
+                                        <td>{prettyTime(el.departureTime)}</td>
+                                        <td>{el.endTime ? prettyTime(el.endTime) : "Not yet"}</td>
                                         <td><Button variant="success" as={Link} to={`/expeditions/${el.id}`}>More</Button></td>
                                     </tr>
                                 )) :

@@ -7,12 +7,14 @@
 - Вместимость (м^3?)
 - Каюты, отображать к каким имеет доступ текущий пользователь
 */
+import {prettyTime} from "../util/pretty";
+
 export function SpaceshipDescription({spaceship}) {
     const manufacturer = spaceship.manufacturer;
     return (
         <div>
             <h5>Spaceship: {spaceship.name}</h5>
-            <div>Date of construction: {spaceship.dateOfConstruction}</div>
+            <div>Date of construction: {prettyTime(spaceship.dateOfConstruction)}</div>
             <div>Max speed: {spaceship.maxSpeed}</div>
             <div>Capacity: {spaceship.capacity}</div>
             <div>In expedition: {spaceship.inExpedition ? "Yes" : "No"}</div>
