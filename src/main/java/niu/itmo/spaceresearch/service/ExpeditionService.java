@@ -44,8 +44,9 @@ public class ExpeditionService {
                 expeditionRequestDto.spaceshipId(),
                 commander.getId()
         );
+        expeditionRequestDto.participants().add(commander.getId());
         // TODO выкинуть ошибку ?
-        for (Integer researcherId : expeditionRequestDto.researchersId()) {
+        for (Integer researcherId : expeditionRequestDto.participants()) {
             expeditionRepository.addResearcherToExpedition(researcherId, expeditionId);
         }
     }
@@ -56,7 +57,7 @@ public class ExpeditionService {
                 .orElseThrow(() -> new ResearcherNotFound("Researcher not found username: %s".formatted(principal.getName())));
 
 
-        List<Researcher> researchers = researcherRepository.findAllById(expeditionRequestDto.researchersId());
+        List<Researcher> researchers = researcherRepository.findAllById(expeditionRequestDto.participants());
         Station sourceStation = stationRepository.findById(expeditionRequestDto.sourceStationId())
                 .orElseThrow(() -> new StationNotFound("Station not found with ID: " + expeditionRequestDto.sourceStationId()));
         Station destinationStation = stationRepository.findById(expeditionRequestDto.destinationStationId())

@@ -66,7 +66,7 @@ $$ LANGUAGE plpgsql;
 --     VALUES (p_source_station_id, p_destination_station_id, p_spaceship_id, p_commander_id);
 -- END;
 -- $$ LANGUAGE plpgsql;
-   -- Функция для создания экспедиции
+--    Функция для создания экспедиции
 CREATE OR REPLACE FUNCTION create_expedition(
     p_source_station_id INT,
     p_destination_station_id INT,

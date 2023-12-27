@@ -20,7 +20,7 @@ public class SpaceshipController {
     private final SpaceshipService spaceshipService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getSpaceshipById(@PathVariable Integer id) {
+    public ResponseEntity<DetailedSpaceshipDto> getSpaceshipById(@PathVariable Integer id) {
         DetailedSpaceshipDto spaceship = spaceshipService.getSpaceshipById(id);
         return ResponseEntity.ok(spaceship);
     }

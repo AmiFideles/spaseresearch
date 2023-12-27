@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.*;
 
 /**
@@ -31,8 +32,13 @@ public class ResearcherService {
     private final ProfessionRepository professionRepository;
     private final AuthenticationManager authenticationManager;
 
-    public List<ResearcherDto> getAvailableResearchers() {
+    public List<ResearcherDto> getAvailableResearchers(Principal principal) {
+        Researcher captain = researcherRepository.findByUsername(principal.getName())
+                .orElseThrow(() -> new ResearcherNotFound(
+                        "Researcher not found with username: %s"
+                                .formatted(principal.getName())));
         List<Researcher> freeResearchers = researcherRepository.findFreeResearchers();
+        freeResearchers.remove(captain);
         return ResearcherMapper.toListResearcherDto(freeResearchers);
     }
 
@@ -61,7 +67,7 @@ public class ResearcherService {
                                 .formatted(authRequest.username())));
         Set<Profession> professions = researcher.getProfessions();
         boolean hasCommanderProfession = professions.stream()
-                .anyMatch(profession -> profession.getName().equals("Commander"));
+                .anyMatch(profession -> profession.getName().equals("Captain"));
         return LoginResponseDto.builder()
                 .credentials(base64Credentials)
                 .isCapitan(hasCommanderProfession)

@@ -9,6 +9,6 @@ public record ExpeditionRequestDto(
         Integer sourceStationId,
         Integer destinationStationId,
         Integer spaceshipId,
-        List<Integer> researchersId
+        List<Integer> participants
 ) {
 }

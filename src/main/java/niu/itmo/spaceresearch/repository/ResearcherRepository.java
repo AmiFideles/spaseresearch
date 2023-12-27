@@ -13,6 +13,6 @@ import java.util.Optional;
 
 public interface ResearcherRepository extends JpaRepository<Researcher, Integer> {
     Optional<Researcher> findByUsername(String username);
-    @Query("SELECT r FROM Researcher r WHERE r.inExpedition = true")
+    @Query("SELECT r FROM Researcher r WHERE r.inExpedition = false ")
     List<Researcher> findFreeResearchers();
 }

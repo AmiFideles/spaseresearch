@@ -18,7 +18,7 @@ public interface SpaceshipRepository extends JpaRepository<Spaceship, Integer> {
             "JOIN Stations st ON s.current_station_id = st.station_id " +
             "JOIN SpaceshipPlanetType spt ON s.spaceship_id = spt.spaceship_id " +
             "JOIN PlanetTypes pt ON spt.type_id = pt.type_id " +
-            "WHERE s.in_expedition = TRUE " +
+            "WHERE s.in_expedition = false " +
             "AND st.station_id = :sourceStationId " +
             "AND pt.type_id IN (" +
             "    SELECT DISTINCT pt.type_id " +
