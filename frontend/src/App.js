@@ -14,19 +14,30 @@ import {Station} from "./components/Station";
 import {ExpeditionCreate} from "./components/ExpeditionCreate";
 import {ReportCreate} from "./components/ReportCreate";
 
+
+const globalStyles = {
+    backgroundImage: "url('./images/image2.jpg')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+};
+
 function App() {
     return (
-        <Routes>
-            <Route path="/" element={<ProtectedComponent><Expeditions/></ProtectedComponent>}/>
-            <Route path="/expeditions/:id" element={<ProtectedComponent><Expedition/></ProtectedComponent>}/>
-            <Route path="/expeditions/create" element={<ProtectedComponent><ExpeditionCreate/></ProtectedComponent>}/>
-            <Route path="/spaceships/:id" element={<ProtectedComponent><Spaceship/></ProtectedComponent>}/>
-            <Route path="/stations/:id" element={<ProtectedComponent><Station/></ProtectedComponent>}/>
-            <Route path="/reports/create/:id" element={<ProtectedComponent><ReportCreate/></ProtectedComponent>}/>
-            <Route path="/register" element={<UnprotectedComponent><Register/></UnprotectedComponent>}/>
-            <Route path="/login" element={<UnprotectedComponent><Login/></UnprotectedComponent>}/>
-            <Route path="*" element={<NotFoundPage/>}/>
-        </Routes>
+        <div style={globalStyles}>
+            <Routes >
+                <Route path="/" element={<ProtectedComponent><Expeditions/></ProtectedComponent>}/>
+                <Route path="/expeditions/:id" element={<ProtectedComponent><Expedition/></ProtectedComponent>}/>
+                <Route path="/expeditions/create" element={<ProtectedComponent><ExpeditionCreate/></ProtectedComponent>}/>
+                <Route path="/spaceships/:id" element={<ProtectedComponent><Spaceship/></ProtectedComponent>}/>
+                <Route path="/stations/:id" element={<ProtectedComponent><Station/></ProtectedComponent>}/>
+                <Route path="/reports/create/:id" element={<ProtectedComponent><ReportCreate/></ProtectedComponent>}/>
+                <Route path="/register" element={<UnprotectedComponent><Register/></UnprotectedComponent>}/>
+                <Route path="/login" element={<UnprotectedComponent><Login/></UnprotectedComponent>}/>
+                <Route path="*" element={<NotFoundPage/>}/>
+            </Routes>
+        </div>
+
     )
 }
 
