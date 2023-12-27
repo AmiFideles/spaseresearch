@@ -25,7 +25,7 @@ const baseQueryWithRedirect = async (args, api, extraOptions) => {
 export const resourceApi = createApi({
     reducerPath: "api/resource",
     baseQuery: baseQueryWithRedirect,
-    tagTypes: ['Expeditions'],
+    tagTypes: ['Expeditions', 'Expedition'],
     endpoints: (build) => ({
         getProfessions: build.query({
             query: () => ({
@@ -44,7 +44,8 @@ export const resourceApi = createApi({
             query: (id) => ({
                 url: `/expeditions/${id}`,
                 method: "GET"
-            })
+            }),
+            providesTags: ['Expedition']
         }),
         getStation: build.query({
             query: (id) => ({
@@ -70,7 +71,7 @@ export const resourceApi = createApi({
                 method: "POST",
                 body: data
             }),
-            invalidatesTags: ['Expeditions']
+            invalidatesTags: ['Expeditions', 'Expedition']
         }),
         finishExpedition: build.mutation({
             query: (id) => ({
@@ -78,7 +79,7 @@ export const resourceApi = createApi({
                 method: "POST",
                 body: {}
             }),
-            invalidatesTags: ['Expeditions']
+            invalidatesTags: ['Expeditions', 'Expedition']
         }),
         createExpedition: build.mutation({
             query: (data) => ({
@@ -98,13 +99,15 @@ export const resourceApi = createApi({
             query: ({sourceStationId, destinationStationId}) => ({
                 url: `/spaceships?sourceStationId=${sourceStationId}&destinationStationId=${destinationStationId}`,
                 method: "GET"
-            })
+            }),
+            providesTags: ['Expedition']
         }),
         getFreeResearchers: build.query({
             query: () => ({
                 url: `/researchers/free`,
                 method: "GET"
-            })
+            }),
+            providesTags: ['Expedition']
         }),
     })
 })
