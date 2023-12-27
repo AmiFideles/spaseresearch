@@ -40,12 +40,11 @@ export function Expedition() {
         e.preventDefault()
         try {
             await finishMission(id).unwrap()
-            dispatch(push(`/expeditions`))
+            dispatch(push(`/`))
         } catch (err) {
             console.log(err);
         }
     }
-    console.log(data);
     return (
         <div>
             <Header/>
@@ -99,7 +98,7 @@ function ExpeditionDescription({data}) {
                 {`Spaceship: ${data.spaceship.name}`}
                 <Button variant="success" as={Link} to={`/spaceships/${data.spaceship.id}`}>></Button>
             </div>
-            <ReportDescription data={data.report}/>
+            {data.status === "LANDED" || data.status === "COMPLETED" ? <ReportDescription data={data.report}/> : ""}
             <div>
                 Participants
                 {data.participants.map(el => <ResearcherDescription key={el.id} data={el}/>)}

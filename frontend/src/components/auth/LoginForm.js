@@ -29,7 +29,6 @@ export function LoginForm() {
         e.preventDefault()
         try {
             const result = await login({username: username, password: password}).unwrap()
-            console.log(result);
             dispatch(loginResult(result))
             dispatch(push("/"))
         } catch (err) {

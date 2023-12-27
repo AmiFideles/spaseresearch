@@ -21,7 +21,7 @@ export function Expeditions() {
                             <th>Status</th>
                             <th>Start</th>
                             <th>Finish</th>
-                            <th>Button</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,7 +33,7 @@ export function Expeditions() {
                                         <td>{el.status}</td>
                                         <td>{el.departureTime}</td>
                                         <td>{el.endTime ? el.endTime : "Not yet"}</td>
-                                        <td><Button variant="success" as={Link} to={`/expeditions/${el.id}`}>></Button></td>
+                                        <td><Button variant="success" as={Link} to={`/expeditions/${el.id}`}>More</Button></td>
                                     </tr>
                                 )) :
                                 null

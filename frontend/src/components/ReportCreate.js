@@ -16,7 +16,6 @@ export function ReportCreate() {
         const checked = e.target.checked;
         const id = e.target.value;
         const name = e.target.name;
-        console.log(breakdowns)
         if (checked) {
             setBreakdowns([...breakdowns, {id, name}]);
         } else {

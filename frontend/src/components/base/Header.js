@@ -6,7 +6,6 @@ import {selectIsCapitan} from "../../redux/login/loginSelectors";
 
 export function Header() {
     const isCapitan = useSelector(selectIsCapitan);
-    console.log(isCapitan);
     return (
         <Navbar bg="light" variant="light" className="d-flex flex-row justify-content-center flex-wrap">
             <Navbar.Brand className="m-1" href="/">Space Researchers</Navbar.Brand>

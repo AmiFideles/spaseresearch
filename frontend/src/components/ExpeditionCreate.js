@@ -149,7 +149,6 @@ function ExpeditionStepTwo({sourceStationId, destinationStationId}) {
     const [spaceshipId, setSpaceshipId] = useState("");
     const {data, isLoading, isError} = useGetSuitableSpaceshipQuery({sourceStationId, destinationStationId})
     const onSpaceshipChanged = (e) => setSpaceshipId(e.target.value);
-    console.log(data);
     return (
         <div>
             <div>
@@ -214,7 +213,7 @@ function ExpeditionStepThree({sourceStationId, destinationStationId, spaceshipId
                 spaceshipId,
                 participants,
             }).unwrap()
-            dispatch(push(`/expeditions`))
+            dispatch(push(`/`))
         } catch (err) {
             console.log(err);
         }
