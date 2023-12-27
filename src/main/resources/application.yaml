@@ -8,5 +8,5 @@ spring:
     driver-class-name: org.postgresql.Driver
   thymeleaf:
     cache: false
-server:
-  port: ${SPRING_PORT}
+#server:
+#  port: ${SPRING_PORT}

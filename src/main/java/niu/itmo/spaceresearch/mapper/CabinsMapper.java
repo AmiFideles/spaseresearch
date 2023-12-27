@@ -15,7 +15,7 @@ public class CabinsMapper {
         return CabinDto.builder()
                 .id(cabins.getId())
                 .name(cabins.getName())
-                .currentHasAccess(false)
+                .currentHasAccess(true)
                 .volumeCubicMeters(cabins.getVolumeCubicMeters())
                 .limitedAccess(cabins.getLimitedAccess())
                 .build();

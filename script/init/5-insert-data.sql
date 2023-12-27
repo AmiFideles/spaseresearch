@@ -142,9 +142,26 @@ VALUES
     ('Geologist'),
     ('Captain');
 
+INSERT INTO ResearcherProfessions(researcher_id, profession_id)
+VALUES
+(2, 5),
+(4, 5),
+(6, 5),
+(8, 5),
+(10,5),
+(12,5),
+(14,5),
+(16,5),
+(18,5),
+(20,5),
+(22,5),
+(24,5),
+(26,5);
+
 INSERT INTO ResearcherProfessions (researcher_id, profession_id)
 SELECT researcher_id, profession_id
 FROM (SELECT researcher_id, profession_id FROM Researchers CROSS JOIN Professions) AS cross_join
+WHERE researcher_id NOT IN (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26)
 ORDER BY random()
 LIMIT 80;
 
@@ -200,14 +217,14 @@ FROM
 -- Создание 16 экспедиций
 INSERT INTO Expeditions (spaceship_id, commander_id, source_station_id, destination_station_id, status, departure_time, end_time)
 VALUES
-    (1, 2, 1, 1, 'IN_PROGRESS', '2022-03-01 12:00:00', NULL),
-    (2, 4, 2, 3, 'IN_PROGRESS', '2022-04-01 14:00:00', NULL),
-    (3, 6, 3, 5, 'IN_PROGRESS', '2022-05-01 16:00:00', NULL),
-    (4, 8, 4, 7, 'IN_PROGRESS', '2022-06-01 18:00:00', NULL),
-    (5, 10, 5, 1, 'IN_PROGRESS', '2022-07-01 20:00:00', NULL),
-    (6, 12, 6, 3, 'IN_PROGRESS', '2022-08-01 22:00:00', NULL),
-    (7, 14, 7, 5, 'IN_PROGRESS', '2022-09-01 00:00:00', NULL),
-    (8, 16, 8, 7, 'IN_PROGRESS', '2022-10-01 02:00:00', NULL),
+    (1,  2, 1, 1, 'IN_PROGRESS', '2022-03-01 12:00:00', NULL),
+    (2,  4, 2, 3, 'IN_PROGRESS', '2022-04-01 14:00:00', NULL),
+    (3,  6, 3, 5, 'IN_PROGRESS', '2022-05-01 16:00:00', NULL),
+    (4,  8, 4, 7, 'IN_PROGRESS', '2022-06-01 18:00:00', NULL),
+    (5,  10, 5, 1, 'IN_PROGRESS', '2022-07-01 20:00:00', NULL),
+    (6,  12, 6, 3, 'IN_PROGRESS', '2022-08-01 22:00:00', NULL),
+    (7,  14, 7, 5, 'IN_PROGRESS', '2022-09-01 00:00:00', NULL),
+    (8,  16, 8, 7, 'IN_PROGRESS', '2022-10-01 02:00:00', NULL),
     (18, 18, 2, 1, 'IN_PROGRESS', '2022-11-01 04:00:00', NULL),
     (20, 20, 4, 3, 'IN_PROGRESS', '2022-12-01 06:00:00', NULL),
     (22, 22, 6, 5, 'IN_PROGRESS', '2023-01-01 08:00:00', NULL),
@@ -218,27 +235,30 @@ VALUES
 INSERT INTO ExpeditionResearchers (expedition_id, researcher_id)
 VALUES
     (1, 31),
+    (1, 2),
     (2, 29),
+    (2, 4),
     (3, 27),
+    (3, 6),
     (4, 25),
+    (4, 8),
     (5, 23),
+    (5, 10),
     (6, 21),
+    (6, 12),
     (7, 19),
+    (7, 14),
     (8, 17),
+    (8, 16),
     (1, 15),
     (1, 13),
     (2, 11),
     (2, 9),
-    (9, 1),
-    (10, 2),
-    (11, 3),
-    (12, 4),
-    (13, 5),
-    (9, 6),
-    (10, 7),
-    (11, 8),
-    (12, 9),
-    (13, 10);
+    (9, 18),
+    (10, 20),
+    (11, 22),
+    (12, 24),
+    (13, 26);
 
 -- Добавление 5 значений в таблицу "Reports" с более содержательными описаниями
 INSERT INTO Reports (expedition_id, description)

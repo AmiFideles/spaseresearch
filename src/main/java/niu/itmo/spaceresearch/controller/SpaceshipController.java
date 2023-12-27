@@ -7,6 +7,7 @@ import niu.itmo.spaceresearch.service.SpaceshipService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -20,8 +21,8 @@ public class SpaceshipController {
     private final SpaceshipService spaceshipService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<DetailedSpaceshipDto> getSpaceshipById(@PathVariable Integer id) {
-        DetailedSpaceshipDto spaceship = spaceshipService.getSpaceshipById(id);
+    public ResponseEntity<DetailedSpaceshipDto> getSpaceshipById(@PathVariable Integer id, Principal principal) {
+        DetailedSpaceshipDto spaceship = spaceshipService.getSpaceshipById(id, principal);
         return ResponseEntity.ok(spaceship);
     }
 
