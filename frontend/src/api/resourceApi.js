@@ -25,6 +25,7 @@ const baseQueryWithRedirect = async (args, api, extraOptions) => {
 export const resourceApi = createApi({
     reducerPath: "api/resource",
     baseQuery: baseQueryWithRedirect,
+    tagTypes: ['Expeditions'],
     endpoints: (build) => ({
         getProfessions: build.query({
             query: () => ({
@@ -36,7 +37,8 @@ export const resourceApi = createApi({
             query: () => ({
                 url: "/expeditions",
                 method: "GET"
-            })
+            }),
+            providesTags: ['Expeditions']
         }),
         getExpedition: build.query({
             query: (id) => ({
@@ -68,6 +70,7 @@ export const resourceApi = createApi({
                 method: "POST",
                 body: data
             }),
+            invalidatesTags: ['Expeditions']
         }),
         finishExpedition: build.mutation({
             query: (id) => ({
@@ -75,6 +78,7 @@ export const resourceApi = createApi({
                 method: "POST",
                 body: {}
             }),
+            invalidatesTags: ['Expeditions']
         }),
         createExpedition: build.mutation({
             query: (data) => ({
@@ -82,6 +86,7 @@ export const resourceApi = createApi({
                 method: "POST",
                 body: data
             }),
+            invalidatesTags: ['Expeditions']
         }),
         getStations: build.query({
             query: () => ({
